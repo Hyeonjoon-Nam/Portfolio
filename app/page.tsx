@@ -5,10 +5,12 @@ export default function Home() {
         {/* HERO */}
         <section id="home" className="text-center">
           <h1 className="text-3xl md:text-4xl font-bold">
-            Hyeonjoon Nam — Gameplay AI & Full-Stack Engineer
+            C++ Systems & Performance — New Grad (RTIS ’26)
           </h1>
           <p className="mt-4 text-zinc-400">
-            I build real-time gameplay systems (C++/C#, Unity/Unreal) and ship full-stack apps with tests &amp; CI/CD.
+            Profiling-first optimization for real-time C++ systems. I reduce spikes and
+    stabilize frame time through data-oriented refactors, cache/memory-aware
+    layouts, and clean interfaces with tests/CI.
           </p>
           <div className="mt-6 flex justify-center gap-3">
             <a href="#projects" className="px-4 py-2 rounded-xl bg-white text-black">View Projects</a>
@@ -30,11 +32,6 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-6 mt-6">
             {/* Suspense Defense */}
             <article className="rounded-2xl border border-zinc-800 p-4">
-              <img
-                src="/images/sd_thumb.png"
-                alt="Suspense Defense"
-                className="w-full h-48 object-cover rounded-lg border border-zinc-800"
-              />
               <h3 className="mt-3 text-xl font-semibold">Suspense Defense</h3>
               <p className="text-zinc-400 mt-1">
                 Tower-defense loop with exploration, pathfinding AI, night defense, and a boss fight.
@@ -64,7 +61,7 @@ export default function Home() {
                   Video
                 </a>
                 <a
-                  href="#"
+                  href="https://github.com/Junhyeongkimm/Suspense_defense"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-3 py-2 rounded-lg border border-zinc-700"
@@ -76,11 +73,6 @@ export default function Home() {
 
             {/* TCAS */}
             <article className="rounded-2xl border border-zinc-800 p-4">
-              <img
-                src="/images/tcas_thumb.png"
-                alt="The Children Are Sleeping"
-                className="w-full h-48 object-cover rounded-lg border border-zinc-800"
-              />
               <h3 className="mt-3 text-xl font-semibold">The Children Are Sleeping</h3>
               <p className="text-zinc-400 mt-1">
                 Team project focusing on gameplay systems and optimization. Steam page in preparation.
@@ -129,7 +121,7 @@ export default function Home() {
               LinkedIn
             </a>
             <a
-              href="https://github.com/HyeonjoonNam-DigiPen"
+              href="https://github.com/Hyeonjoon-Nam"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 rounded-xl border border-zinc-700"
