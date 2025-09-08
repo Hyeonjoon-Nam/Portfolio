@@ -19,3 +19,12 @@ Live site with demo videos, downloadable resume, and SEO/OG.
 npm i
 npm run dev
 # open http://localhost:3000
+````
+
+## Deploy
+
+Push to `main` → Vercel auto-deploy.
+
+## License
+
+MIT
