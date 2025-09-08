@@ -1,103 +1,144 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="min-h-screen bg-zinc-950 text-zinc-100">
+      <div className="max-w-5xl mx-auto px-5 py-12">
+        {/* HERO */}
+        <section id="home" className="text-center">
+          <h1 className="text-3xl md:text-4xl font-bold">
+            Hyeonjoon Nam — Gameplay AI & Full-Stack Engineer
+          </h1>
+          <p className="mt-4 text-zinc-400">
+            I build real-time gameplay systems (C++/C#, Unity/Unreal) and ship full-stack apps with tests &amp; CI/CD.
+          </p>
+          <div className="mt-6 flex justify-center gap-3">
+            <a href="#projects" className="px-4 py-2 rounded-xl bg-white text-black">View Projects</a>
+            <a
+              href="/resume/Hyeonjoon_Nam_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-xl border border-zinc-700"
+            >
+              Download Resume
+            </a>
+          </div>
+        </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        {/* PROJECTS */}
+        <section id="projects" className="mt-16">
+          <h2 className="text-2xl font-semibold">Projects</h2>
+
+          <div className="grid md:grid-cols-2 gap-6 mt-6">
+            {/* Suspense Defense */}
+            <article className="rounded-2xl border border-zinc-800 p-4">
+              <img
+                src="/images/sd_thumb.png"
+                alt="Suspense Defense"
+                className="w-full h-48 object-cover rounded-lg border border-zinc-800"
+              />
+              <h3 className="mt-3 text-xl font-semibold">Suspense Defense</h3>
+              <p className="text-zinc-400 mt-1">
+                Tower-defense loop with exploration, pathfinding AI, night defense, and a boss fight.
+              </p>
+
+              {/* Responsive YouTube embed (SD) */}
+              <div
+                className="mt-3"
+                style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: 12 }}
+              >
+                <iframe
+                  src="https://www.youtube.com/embed/_2lPt6jRqoE?rel=0&modestbranding=1"
+                  title="Suspense Defense — 1-min Demo"
+                  loading="lazy"
+                  allowFullScreen
+                  style={{ position: "absolute", top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                />
+              </div>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                <a
+                  href="https://youtu.be/_2lPt6jRqoE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-2 rounded-lg border border-zinc-700"
+                >
+                  Video
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-2 rounded-lg border border-zinc-700"
+                >
+                  GitHub
+                </a>
+              </div>
+            </article>
+
+            {/* TCAS */}
+            <article className="rounded-2xl border border-zinc-800 p-4">
+              <img
+                src="/images/tcas_thumb.png"
+                alt="The Children Are Sleeping"
+                className="w-full h-48 object-cover rounded-lg border border-zinc-800"
+              />
+              <h3 className="mt-3 text-xl font-semibold">The Children Are Sleeping</h3>
+              <p className="text-zinc-400 mt-1">
+                Team project focusing on gameplay systems and optimization. Steam page in preparation.
+              </p>
+
+              {/* Responsive YouTube embed (TCAS Trailer) */}
+              <div
+                className="mt-3"
+                style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: 12 }}
+              >
+                <iframe
+                  src="https://www.youtube.com/embed/C3MexPR3Eyc?rel=0&modestbranding=1"
+                  title="TCAS — Trailer"
+                  loading="lazy"
+                  allowFullScreen
+                  style={{ position: "absolute", top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                />
+              </div>
+
+              <div className="mt-3 flex gap-2 flex-wrap">
+                <a
+                  href="https://youtu.be/C3MexPR3Eyc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-2 rounded-lg border border-zinc-700"
+                >
+                  Video
+                </a>
+                {/* Steam 링크 생기면 여기에 버튼 하나 더 추가 */}
+              </div>
+            </article>
+          </div>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" className="mt-16">
+          <h2 className="text-2xl font-semibold">Contact</h2>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <a href="mailto:hyeonjoon.nam.dev@gmail.com" className="px-4 py-2 rounded-xl bg-white text-black">Email</a>
+            <a
+              href="https://www.linkedin.com/in/hyeonjoon-nam"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-xl border border-zinc-700"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/HyeonjoonNam-DigiPen"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-xl border border-zinc-700"
+            >
+              GitHub
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }
