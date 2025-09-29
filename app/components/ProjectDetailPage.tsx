@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import type { Project } from "../data/types";
-import dynamic from "next/dynamic";
 
-// 클라에서만 필요한 조각들을 동적 로드
-const GalleryClient = dynamic(() => import("./GalleryClient"), { ssr: false });
-const YouTubeLite = dynamic(() => import("./YouTubeLite"), { ssr: false });
+// ✅ 서버 컴포넌트에서 클라 컴포넌트를 "그냥 import"로 사용
+import GalleryClient from "./GalleryClient";
+import YouTubeLite from "./YouTubeLite";
 
 export default function ProjectDetailPage({ p }: { p: Project }) {
   return (
