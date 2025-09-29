@@ -1,47 +1,89 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 
-const GalleryLightbox = dynamic(() => import("./GalleryLightbox"), { ssr: false });
+type Props = {
+  open: boolean;
+  images: string[];
+  index: number;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+};
 
-export default function GalleryClient({ title, images }: { title: string; images: string[] }) {
-  const [open, setOpen] = useState(false);
-  const [idx, setIdx] = useState(0);
-  const openAt = (i: number) => { setIdx(i); setOpen(true); };
-  const prev = () => setIdx((i) => (i - 1 + images.length) % images.length);
-  const next = () => setIdx((i) => (i + 1) % images.length);
+export default function GalleryLightbox({ open, images, index, onClose, onPrev, onNext }: Props) {
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+  const imgSrc = images[index];
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") onPrev();
+      if (e.key === "ArrowRight") onNext();
+    };
+    document.addEventListener("keydown", onKey);
+    closeBtnRef.current?.focus();
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, onClose, onPrev, onNext]);
+
+  if (!open) return null;
 
   return (
-    <>
-      <div className="mt-3 grid grid-cols-2 md:grid-cols-3 gap-3">
-        {images.map((src, i) => (
-          <button
-            key={src}
-            onClick={() => openAt(i)}
-            className="relative w-full h-40 rounded-lg border border-white/10 overflow-hidden focus:outline-none focus:ring-2 focus:ring-white/30"
-            aria-label={`Open image ${i + 1}`}
-          >
-            <Image
-              src={src}
-              alt={`${title} screenshot ${i + 1}`}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover"
-            />
-          </button>
-        ))}
-      </div>
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-[60] bg-black/80 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-5xl h-[70vh] md:h-[80vh] bg-black/40 rounded-2xl overflow-hidden border border-white/10"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* 큰 이미지 */}
+        <div className="relative w-full h-full">
+          <Image
+            src={imgSrc}
+            alt="Gallery image"
+            fill
+            sizes="100vw"
+            className="object-contain"
+            priority
+          />
+        </div>
 
-      <GalleryLightbox
-        open={open}
-        images={images}
-        index={idx}
-        onClose={() => setOpen(false)}
-        onPrev={prev}
-        onNext={next}
-      />
-    </>
+        {/* 닫기 버튼 */}
+        <button
+          ref={closeBtnRef}
+          onClick={onClose}
+          aria-label="Close"
+          className="absolute top-3 right-3 rounded-full px-3 py-2 text-sm bg-white/10 hover:bg-white/20 border border-white/20"
+        >
+          ✕
+        </button>
+
+        {/* 좌/우 버튼 */}
+        <button
+          onClick={onPrev}
+          aria-label="Previous image"
+          className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full px-3 py-2 text-sm bg-white/10 hover:bg-white/20 border border-white/20"
+        >
+          ←
+        </button>
+        <button
+          onClick={onNext}
+          aria-label="Next image"
+          className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full px-3 py-2 text-sm bg-white/10 hover:bg-white/20 border border-white/20"
+        >
+          →
+        </button>
+
+        {/* 하단 인디케이터 */}
+        <div className="absolute bottom-3 left-0 right-0 text-center text-xs text-white/80">
+          {index + 1} / {images.length}
+        </div>
+      </div>
+    </div>
   );
 }
