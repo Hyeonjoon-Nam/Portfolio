@@ -1,33 +1,19 @@
-"use client";
+// ⛔ "use client";  제거
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "../data/types";
 import dynamic from "next/dynamic";
 
-// ✅ 라이트박스는 필요할 때만 클라이언트 사이드 로드
-const GalleryLightbox = dynamic(() => import("./GalleryLightbox"), { ssr: false });
+const GalleryClient = dynamic(() => import("./GalleryClient"), { ssr: false });
+const YouTubeLite = dynamic(() => import("./YouTubeLite"), { ssr: false });
 
 export default function ProjectDetailPage({ p }: { p: Project }) {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-
-  const openAt = (i: number) => {
-    setLightboxIndex(i);
-    setLightboxOpen(true);
-  };
-  const onPrev = () => setLightboxIndex((i) => (i - 1 + p.images.length) % p.images.length);
-  const onNext = () => setLightboxIndex((i) => (i + 1) % p.images.length);
-
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100">
       <div className="max-w-5xl mx-auto px-5 py-10">
         {/* Back */}
-        <Link
-          href="/#projects"
-          className="inline-block text-sm mb-4 opacity-80 hover:opacity-100"
-        >
+        <Link href="/#projects" className="inline-block text-sm mb-4 opacity-80 hover:opacity-100">
           ← Back to Projects
         </Link>
 
@@ -38,34 +24,9 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
         {/* Media */}
         <div className="mt-6">
           {p.media[0]?.type === "youtube" ? (
-            <div
-              className="rounded-xl overflow-hidden"
-              style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
-            >
-              <iframe
-                src={`https://www.youtube.com/embed/${p.media[0].src}?rel=0&modestbranding=1`}
-                title={`${p.title} video`}
-                allowFullScreen
-                loading="lazy"
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  border: 0,
-                }}
-              />
-            </div>
+            <YouTubeLite id={p.media[0].src} title={`${p.title} video`} />
           ) : (
-            <video
-              className="w-full rounded-xl"
-              src={p.media[0]?.src}
-              autoPlay
-              loop
-              muted
-              playsInline
-              controls
-            />
+            <video className="w-full rounded-xl" src={p.media[0]?.src} loop muted playsInline controls />
           )}
         </div>
 
@@ -75,78 +36,39 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
             <h2 className="text-xl font-semibold">What is this game?</h2>
             <p className="mt-2 text-zinc-300">{p.description}</p>
 
-            <h2 className="text-xl font-semibold mt-6">
-              Challenges &amp; Solutions
-            </h2>
+            <h2 className="text-xl font-semibold mt-6">Challenges &amp; Solutions</h2>
             <ul className="mt-2 list-disc list-inside text-zinc-300 space-y-1">
-              {p.challenges.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
+              {p.challenges.map((c) => (<li key={c}>{c}</li>))}
             </ul>
           </section>
 
           <aside>
             <h3 className="text-lg font-semibold">My Role</h3>
             <ul className="mt-2 space-y-1 text-zinc-300">
-              {p.roles.map((r) => (
-                <li key={r}>• {r}</li>
-              ))}
+              {p.roles.map((r) => (<li key={r}>• {r}</li>))}
             </ul>
 
-            {p.links && p.links.length > 0 && (
+            {p.links?.length ? (
               <>
                 <h3 className="text-lg font-semibold mt-6">Links</h3>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {p.links.map((l) => (
-                    <a
-                      key={l.href}
-                      href={l.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-3 py-1.5 rounded-lg border border-zinc-700 hover:bg-white/10"
-                    >
+                    <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-lg border border-zinc-700 hover:bg-white/10">
                       {l.label}
                     </a>
                   ))}
                 </div>
               </>
-            )}
+            ) : null}
           </aside>
         </div>
 
         {/* Gallery */}
         <section className="mt-8">
           <h2 className="text-xl font-semibold">Gallery</h2>
-          <div className="mt-3 grid grid-cols-2 md:grid-cols-3 gap-3">
-            {p.images.map((src, i) => (
-              <button
-                key={src}
-                onClick={() => openAt(i)}
-                className="relative w-full h-40 rounded-lg border border-white/10 overflow-hidden focus:outline-none focus:ring-2 focus:ring-white/30"
-                aria-label={`Open image ${i + 1}`}
-              >
-                <Image
-                  src={src}
-                  alt={`${p.title} screenshot ${i + 1}`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover"
-                />
-              </button>
-            ))}
-          </div>
+          <GalleryClient title={p.title} images={p.images} />
         </section>
       </div>
-
-      {/* Lightbox 모달 */}
-      <GalleryLightbox
-        open={lightboxOpen}
-        images={p.images}
-        index={lightboxIndex}
-        onClose={() => setLightboxOpen(false)}
-        onPrev={onPrev}
-        onNext={onNext}
-      />
     </main>
   );
 }
