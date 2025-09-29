@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { Project } from "../data/types";
-import GalleryLightbox from "./GalleryLightbox";   // ⬅ 추가
+import GalleryLightbox from "./GalleryLightbox";
+import Link from "next/link";
 
 export default function ProjectDetailPage({ p }: { p: Project }) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -21,9 +22,9 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
     <main className="min-h-screen bg-zinc-950 text-zinc-100">
       <div className="max-w-5xl mx-auto px-5 py-10">
         {/* Back */}
-        <a href="/#projects" className="inline-block text-sm mb-4 opacity-80 hover:opacity-100">
+        <Link href="/#projects" className="inline-block text-sm mb-4 opacity-80 hover:opacity-100">
           ← Back to Projects
-        </a>
+        </Link>
 
         {/* Title */}
         <h1 className="text-3xl md:text-4xl font-bold">{p.title}</h1>
