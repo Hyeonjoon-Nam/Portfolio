@@ -1,10 +1,10 @@
-// ⛔ "use client";  제거
+// ⛔ "use client";  없음 (Server Component)
 
-import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "../data/types";
 import dynamic from "next/dynamic";
 
+// 클라에서만 필요한 조각들을 동적 로드
 const GalleryClient = dynamic(() => import("./GalleryClient"), { ssr: false });
 const YouTubeLite = dynamic(() => import("./YouTubeLite"), { ssr: false });
 
@@ -48,18 +48,19 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
               {p.roles.map((r) => (<li key={r}>• {r}</li>))}
             </ul>
 
-            {p.links?.length ? (
+            {!!p.links?.length && (
               <>
                 <h3 className="text-lg font-semibold mt-6">Links</h3>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {p.links.map((l) => (
-                    <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-lg border border-zinc-700 hover:bg-white/10">
+                    <a key={l.href} href={l.href} target="_blank" rel="noreferrer"
+                       className="px-3 py-1.5 rounded-lg border border-zinc-700 hover:bg-white/10">
                       {l.label}
                     </a>
                   ))}
                 </div>
               </>
-            ) : null}
+            )}
           </aside>
         </div>
 
