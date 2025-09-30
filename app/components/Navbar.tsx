@@ -10,8 +10,12 @@ export default function Navbar() {
           <Link href="/" className="font-semibold hover:opacity-100 opacity-90">
             HN
           </Link>
-          <a href="/#projects" className="opacity-80 hover:opacity-100">Projects</a>
-          <a href="/#contact" className="opacity-80 hover:opacity-100">Contact</a>
+          <Link href="/#projects" className="opacity-80 hover:opacity-100">
+            Projects
+          </Link>
+          <Link href="/#contact" className="opacity-80 hover:opacity-100">
+            Contact
+          </Link>
         </div>
         <div className="flex items-center gap-4">
           <Link
@@ -30,14 +34,14 @@ export default function Navbar() {
           >
             GitHub
           </Link>
-          <a
+          <Link
             href="/Hyeonjoon_Nam_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="opacity-80 hover:opacity-100 underline underline-offset-4"
           >
             Resume
-          </a>
+          </Link>
         </div>
       </nav>
     </header>
