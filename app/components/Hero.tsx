@@ -1,46 +1,28 @@
-// app/components/Hero.tsx
+"use client";
+
 export default function Hero() {
   return (
-    <section className="max-w-5xl mx-auto px-6 pt-14 pb-10">
-      {/* 이름 + 직군 */}
-      <h1 className="text-3xl sm:text-5xl font-bold tracking-tight">
-        Hyeonjoon Nam —{" "}
-        <span className="text-white/80">Gameplay Programmer</span>
+    <section id="home" className="text-center">
+      {/* 이름 */}
+      <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
+        Hyeonjoon Nam
       </h1>
 
-      {/* 짧은 소개 */}
-      <p className="mt-4 text-base sm:text-lg text-white/70 max-w-3xl">
-        C++ / Unreal Engine / Unity — specializing in Gameplay AI, Systems,
-        and Optimization for real-time interactive games.
+      {/* 원하는 직군(간단) */}
+      <p className="mt-3 text-base md:text-lg text-white/80">
+        Gameplay / AI Engineer · Systems Optimization · New Grad (RTIS ’26)
       </p>
 
-      {/* 버튼들 */}
-      <div className="mt-6 flex flex-wrap gap-3">
-        <a
-          href="/Hyeonjoon_Nam_Resume.pdf"
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-xl px-4 py-2 bg-white/10 hover:bg-white/15 transition"
-        >
-          Download Resume
-        </a>
-        <a
-          href="https://www.linkedin.com/in/hyeonjoon-nam"
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-xl px-4 py-2 border border-white/20 hover:bg-white/10 transition"
-        >
-          LinkedIn
-        </a>
-        <a
-          href="https://github.com/Hyeonjoon-Nam"
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-xl px-4 py-2 border border-white/20 hover:bg-white/10 transition"
-        >
-          GitHub
-        </a>
-      </div>
+      {/* About / Summary */}
+      <h2 className="mt-10 text-2xl md:text-3xl font-semibold">
+        About
+      </h2>
+      <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base leading-7 text-white/80">
+        I build real-time gameplay systems and tactical AI with a profiling-first mindset.
+        My focus is stabilizing frame time through data-oriented refactors, cache-aware layouts,
+        and clean interfaces. I’ve led small teams, owned core mechanics end-to-end, and shipped
+        pathfinding/patrol systems that scale from prototypes to large waves without spikes.
+      </p>
     </section>
   );
 }
