@@ -8,16 +8,14 @@ export default function Home() {
         {/* HERO: Name / Role / About */}
         <Hero />
 
-        {/* PROJECTS 헤더 (중앙, 크게) */}
-        <section id="projects" className="mt-20">
+        <section id="projects" className="mt-20 scroll-mt-20">
           <h2 className="text-2xl md:text-3xl font-semibold text-center">Projects</h2>
           <div className="mt-8">
             <Projects />
           </div>
         </section>
 
-        {/* CONTACT (원래 섹션 유지, 헤더 중앙 정렬) */}
-        <section id="contact" className="mt-20">
+        <section id="contact" className="mt-20 scroll-mt-20">
           <h2 className="text-2xl md:text-3xl font-semibold text-center">Contact</h2>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <a

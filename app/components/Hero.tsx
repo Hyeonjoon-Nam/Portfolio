@@ -3,26 +3,23 @@
 export default function Hero() {
   return (
     <section id="home" className="text-center">
-      {/* 이름 */}
       <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
         Hyeonjoon Nam
       </h1>
 
-      {/* 원하는 직군(간단) */}
       <p className="mt-3 text-base md:text-lg text-white/80">
-        Gameplay / AI Engineer · Systems Optimization · New Grad (RTIS ’26)
+        Software Engineer — Systems & Performance
       </p>
 
-      {/* About / Summary */}
-      <h2 className="mt-10 text-2xl md:text-3xl font-semibold">
-        About
-      </h2>
+      <h2 className="mt-10 text-2xl md:text-3xl font-semibold">About</h2>
       <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base leading-7 text-white/80">
-        I build real-time gameplay systems and tactical AI with a profiling-first mindset.
-        My focus is stabilizing frame time through data-oriented refactors, cache-aware layouts,
-        and clean interfaces. I’ve led small teams, owned core mechanics end-to-end, and shipped
-        pathfinding/patrol systems that scale from prototypes to large waves without spikes.
-      </p>
+  I’m a Software Engineer specializing in systems and performance. Experienced as Tech Lead in projects of 4–13 members, building gameplay systems and optimizing performance across custom engines, Unreal Engine 5, and Unity. My core strengths are{" "}
+  <b>Systems &amp; Performance Engineering</b>,{" "}
+  <b>Architectural Patterns</b>,{" "}
+  <b>Gameplay Systems</b>, and{" "}
+  <b>Collaboration &amp; Leadership</b>.
+</p>
+
     </section>
   );
 }

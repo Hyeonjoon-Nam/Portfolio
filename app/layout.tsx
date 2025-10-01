@@ -2,19 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 
-// 사이트 URL만 실제 배포 주소로 바꿔주세요
 const siteUrl = "https://portfolio-sooty-rho-46.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Hyeonjoon Nam",
+  title: "Hyeonjoon Nam — Software Engineer (Systems & Performance)",
   description:
-    "Gameplay / AI Engineer · Systems Optimization · New Grad (RTIS ’26).",
+    "Tech Lead experience (4–13 members). Profiling-driven optimization, A* pathfinding, and architecture patterns across custom C++ engines and UE5/Unity.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Hyeonjoon Nam",
+    title: "Hyeonjoon Nam — Software Engineer (Systems & Performance)",
     description:
-      "Gameplay / AI Engineer · Systems Optimization · New Grad (RTIS ’26).",
+      "Profiling • Spike reduction • A* pathfinding • Architecture patterns. Tech Lead experience across custom C++ engines and UE5/Unity.",
     url: siteUrl,
     siteName: "Hyeonjoon Nam",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Hyeonjoon Nam" }],
@@ -22,9 +21,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hyeonjoon Nam",
+    title: "Hyeonjoon Nam — Systems & Performance",
     description:
-      "Gameplay / AI Engineer · Systems Optimization · New Grad (RTIS ’26).",
+      "Gameplay systems + performance optimization in custom C++ engines and UE5/Unity.",
     images: ["/og.png"],
   },
   icons: {
@@ -33,10 +32,11 @@ export const metadata: Metadata = {
   },
 };
 
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="bg-zinc-950">
-      <body className="min-h-screen bg-zinc-950 text-zinc-100">
+      <body className="min-h-screen bg-zinc-950 text-zinc-100 pt-14 md:pt-14">
         <Navbar />
         {children}
       </body>

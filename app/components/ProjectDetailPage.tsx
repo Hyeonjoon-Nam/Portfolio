@@ -1,9 +1,6 @@
-// ⛔ "use client";  없음 (Server Component)
-
 import Link from "next/link";
 import type { Project } from "../data/types";
 
-// ✅ 서버 컴포넌트에서 클라 컴포넌트를 "그냥 import"로 사용
 import GalleryClient from "./GalleryClient";
 import YouTubeLite from "./YouTubeLite";
 
@@ -12,7 +9,7 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
     <main className="min-h-screen bg-zinc-950 text-zinc-100">
       <div className="max-w-5xl mx-auto px-5 py-10">
         {/* Back */}
-        <Link href="/#projects" className="inline-block text-sm mb-4 opacity-80 hover:opacity-100">
+        <Link href="/#projects" className="inline-block text-sm mb-4 text-white/80 hover:text-white underline underline-offset-4">
           ← Back to Projects
         </Link>
 
