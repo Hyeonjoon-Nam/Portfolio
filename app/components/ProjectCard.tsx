@@ -10,25 +10,24 @@ export default function ProjectCard({ p }: { p: Project }) {
       href={`/${p.id}`}
       className="group overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 transition-colors"
     >
-      {/* Thumb */}
+      {/* 이미지 컨테이너를 relative로 두되, Image는 width/height로 비율 고정 */}
       <div className="relative">
         {thumb ? (
-          <div className="relative w-full aspect-video">
-            <Image
-              src={thumb}
-              alt={`${p.title} thumbnail`}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-              className="object-cover"
-              priority={false}
-            />
-          </div>
+          <Image
+            src={thumb}
+            alt={`${p.title} thumbnail`}
+            width={1280}
+            height={720}         // 16:9 고정 비율
+            className="w-full h-auto block object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw"
+            priority={false}
+          />
         ) : (
-          <div className="w-full aspect-video bg-zinc-800" />
+          <div className="w-full h-48 sm:h-56 bg-zinc-800" />
         )}
 
-        {/* gradient + title */}
-        <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+        {/* 하단 그라데이션 + 타이틀 */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
           <h3 className="text-lg md:text-xl font-semibold drop-shadow-sm">
             {p.title}
           </h3>
