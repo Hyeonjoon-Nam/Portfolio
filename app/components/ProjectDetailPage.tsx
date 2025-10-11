@@ -1,13 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Project } from "../data/types";
 import GalleryClient from "./GalleryClient";
 
-// 유튜브 ID를 src(전체 URL 또는 ID)에서 안전하게 뽑아내는 헬퍼
 function getYouTubeId(src: string): string | null {
   if (!src) return null;
-  // 이미 ID만 온 경우(11자 이상, 특수문자 없음)도 통과시킴
   if (/^[a-zA-Z0-9_-]{8,}$/.test(src)) return src;
-
   const m =
     src.match(
       /(?:youtube\.com\/.*[?&]v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{8,})/
@@ -21,10 +19,7 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
   const hasRoles = Array.isArray(p.roles) && p.roles.length > 0;
   const hasChallenges = Array.isArray(p.challenges) && p.challenges.length > 0;
 
-  // Fallback: media가 없으면 첫 이미지
   const primaryImage = hasImages ? p.images![0] : null;
-
-  // 첫 미디어만 사용 (필요하면 map으로 확장 가능)
   const firstMedia = hasMedia ? p.media![0] : null;
   const youTubeId =
     firstMedia?.type === "youtube" ? getYouTubeId(firstMedia.src) : null;
@@ -39,7 +34,6 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
           ← Back to Home
         </Link>
 
-        {/* Title & Tagline */}
         <h1 className="text-3xl md:text-4xl font-bold">{p.title}</h1>
         {p.tagline && <p className="mt-2 text-zinc-400">{p.tagline}</p>}
 
@@ -67,22 +61,25 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
               />
             ) : null
           ) : primaryImage ? (
-            <img
-              src={primaryImage}
-              alt={`${p.title} preview`}
-              className="w-full rounded-xl"
-              loading="lazy"
-            />
+            <div className="relative w-full rounded-xl overflow-hidden">
+              <Image
+                src={primaryImage}
+                alt={`${p.title} preview`}
+                width={1280}
+                height={720}
+                className="w-full h-auto"
+                priority={false}
+                sizes="100vw"
+              />
+            </div>
           ) : null}
         </div>
 
-        {/* What is this game? */}
         <section className="mt-10">
           <h2 className="text-xl font-semibold">What is this game?</h2>
           <p className="mt-2 text-zinc-300">{p.description}</p>
         </section>
 
-        {/* Team Info (optional) */}
         {(p.role || p.team || p.tools) && (
           <section className="mt-10">
             <h2 className="text-xl font-semibold">Team Info</h2>
@@ -106,7 +103,6 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
           </section>
         )}
 
-        {/* Contributions */}
         {hasRoles && (
           <section className="mt-10">
             <h2 className="text-xl font-semibold">Contributions</h2>
@@ -118,7 +114,6 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
           </section>
         )}
 
-        {/* Challenges & Solutions */}
         {hasChallenges && (
           <section className="mt-10">
             <h2 className="text-xl font-semibold">Challenges &amp; Solutions</h2>
@@ -130,7 +125,6 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
           </section>
         )}
 
-        {/* Gallery */}
         {hasImages && (
           <section className="mt-10">
             <h2 className="text-xl font-semibold">Gallery</h2>
@@ -140,7 +134,6 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
           </section>
         )}
 
-        {/* Links */}
         {!!p.links?.length && (
           <section className="mt-10">
             <h2 className="text-xl font-semibold">Links</h2>
@@ -160,7 +153,6 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
           </section>
         )}
 
-        {/* Contact */}
         <section id="contact" className="mt-16 scroll-mt-20">
           <h2 className="text-xl md:text-2xl font-semibold text-center">Contact</h2>
           <p className="mt-3 text-center text-zinc-400">Feel free to reach out.</p>
