@@ -13,14 +13,17 @@ export default function Navbar() {
           HN
         </Link>
 
-        {/* 메뉴 */}
+        {/* 메뉴: Home / Contact / 외부 링크들 */}
         <div className="flex gap-6">
-          <Link href="#projects" className="text-white text-lg hover:text-zinc-300 transition">
-            Projects
+          <Link href="/" className="text-white text-lg hover:text-zinc-300 transition">
+            Home
           </Link>
-          <Link href="#contact" className="text-white text-lg hover:text-zinc-300 transition">
+
+          {/* 현재 페이지 하단 contact 섹션으로 스크롤 */}
+          <a href="#contact" className="text-white text-lg hover:text-zinc-300 transition">
             Contact
-          </Link>
+          </a>
+
           <a
             href="https://www.linkedin.com/in/hyeonjoon-nam"
             target="_blank"

@@ -1,14 +1,33 @@
-export type Media = { type: "youtube" | "video"; src: string };
+// app/data/types.ts
+
+export type Media = {
+  type: "youtube" | "video";
+  src: string;
+};
+
+export type Link = {
+  label: string;
+  href: string;
+};
 
 export type Project = {
-  id: "suspense-defense" | "tcas" | "they-are" | "bastion";
+  id: string;
   title: string;
-  tagline: string;
-  description: string;     // What is this game?
-  roles: string[];         // My Role
-  challenges: string[];    // Challenges & Solutions (요약)
-  media: Media[];          // youtube id or /videos/clip-8s.mp4
-  images: string[];        // /images/shot-*.webp
-  thumb: string;           // /thumbs/thumb-1.webp
-  links?: { label: string; href: string }[];
+  tagline?: string;
+  thumb: string;
+  description: string;
+
+  // content
+  roles: string[];
+  challenges: string[];
+
+  // optional media & assets
+  media?: Media[];
+  images?: string[];
+  links?: Link[];
+
+  // NEW: Team Info (optional fields)
+  role?: string;   // e.g., "Tech Lead"
+  team?: string;   // e.g., "Tech 4 / Art 5 / Design 4 — 13 total"
+  tools?: string;  // e.g., "Unreal Engine 5, Behavior Tree, Perforce"
 };

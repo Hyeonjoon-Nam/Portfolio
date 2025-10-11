@@ -1,40 +1,35 @@
-// "use client";  // ⛔ 제거
-
 import Link from "next/link";
-import Image from "next/image";
 import type { Project } from "../data/types";
 
-export default function ProjectCard({ p, priority = false }: { p: Project; priority?: boolean }) {
+export default function ProjectCard({ p }: { p: Project }) {
   return (
     <Link
       href={`/${p.id}`}
-      className="group text-left rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition bg-white/5 focus:outline-none focus:ring-2 focus:ring-white/30"
+      className="group overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 transition-colors"
     >
-      {/* 썸네일 */}
-      <div className="relative aspect-video w-full">
-        <Image
-          src={p.thumb}
+      {/* Thumb */}
+      <div className="relative">
+        <img
+          src={p.thumb || p.images?.[0] || ""}
           alt={`${p.title} thumbnail`}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover opacity-95 group-hover:opacity-100"
-          priority={priority}                // ⬅ 첫 카드 LCP 가점
-          fetchPriority={priority ? "high" : undefined}
+          className="w-full aspect-video object-cover"
+          loading="lazy"
         />
-      </div>
-
-      <div className="p-4">
-        <h3 className="text-lg font-semibold">{p.title}</h3>
-        <p className="text-white/70 text-sm mt-1 line-clamp-2">{p.tagline}</p>
-
-        <div className="mt-2 flex flex-wrap gap-2">
-          {p.roles.slice(0, 3).map((r) => (
-            <span key={r} className="text-xs px-2 py-0.5 rounded-full bg-white/10 border border-white/10">{r}</span>
-          ))}
+        {/* gradient + title */}
+        <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+          <h3 className="text-lg md:text-xl font-semibold drop-shadow-sm">
+            {p.title}
+          </h3>
+          {p.tagline && (
+            <p className="mt-1 text-sm text-zinc-300/90 line-clamp-1">
+              {p.tagline}
+            </p>
+          )}
         </div>
-
-        <div className="mt-3 text-sm underline underline-offset-4 text-white/80">View details →</div>
       </div>
+
+      {/* bottom bar (optional: minimal details) */}
+      {/* <div className="px-4 py-3 text-sm text-zinc-400">{/* keep empty for clean look */}{/*}</div> */}
     </Link>
   );
 }

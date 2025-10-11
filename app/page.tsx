@@ -9,44 +9,28 @@ export default function Home() {
         <Hero />
 
         <section id="projects" className="mt-20 scroll-mt-20">
-          <h2 className="text-2xl md:text-3xl font-semibold text-center">Projects</h2>
-          <div className="mt-8">
-            <Projects />
-          </div>
+          {/* 중복 헤더 제거: Projects 컴포넌트 내부 타이틀 사용 */}
+          <Projects />
         </section>
 
+        {/* 하단 공통 Contact 섹션 */}
         <section id="contact" className="mt-20 scroll-mt-20">
           <h2 className="text-2xl md:text-3xl font-semibold text-center">Contact</h2>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <p className="mt-3 text-center text-zinc-400">
+            Feel free to reach out.
+          </p>
+          <div className="mt-6 flex flex-col items-center gap-2">
             <a
               href="mailto:hyeonjoon.nam.dev@gmail.com"
-              className="px-4 py-2 rounded-xl bg-white text-black"
+              className="underline underline-offset-4 hover:text-white"
             >
-              Email
+              hyeonjoon.nam.dev@gmail.com
             </a>
             <a
-              href="https://www.linkedin.com/in/hyeonjoon-nam"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 rounded-xl border border-zinc-700"
+              href="tel:+12067867888"
+              className="underline underline-offset-4 hover:text-white"
             >
-              LinkedIn
-            </a>
-            <a
-              href="https://github.com/Hyeonjoon-Nam"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 rounded-xl border border-zinc-700"
-            >
-              GitHub
-            </a>
-            <a
-              href="/Hyeonjoon_Nam_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 rounded-xl border border-zinc-700"
-            >
-              Resume
+              (206) 786 7888
             </a>
           </div>
         </section>
