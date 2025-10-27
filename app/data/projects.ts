@@ -2,6 +2,35 @@
 import type { Project } from "./types";
 
 export const projects: Project[] = [
+{
+    id: "ToV",                       // <- /ToV 라우트와 일치 (지금 구조 유지)
+    title: "Traid of Valor",
+    thumb: undefined,                // no thumbnail yet; card will show a neutral block
+    images: [],                      // empty until we have assets
+    media: [],                       // (youtube/video) later
+    tagline: "UE5 co-op action (server-authoritative)",
+    description:
+      "Co-op action prototype under a server-authoritative model; I led QA automation and core combat/AI stabilization.",
+    role: "QA Lead",
+    team: "6-person team",
+    tools:
+      "C++, Unreal Engine 5, Perforce (Helix Core), Client-Server/RPC, Behavior Trees, AI Perception, Discord Webhooks",
+    roles: [
+      "Implemented server-authoritative combat with AnimNotify-timed hit checks for deterministic results.",
+      "Set up a Perforce→Discord QA pipeline with scheduled commit detection and CI-style notifications.",
+      "Designed a user-mapped checkout monitor that posts opened-file reports to Discord, avoiding conflicts and tracking progress.",
+      "Unified player/enemy targeting via Perception + proximity services for smooth state transitions.",
+      "Validated multiplayer combat flow in PIE and dedicated-server tests.",
+    ],
+    challenges: [
+      "Ensured deterministic hit resolution under replication/latency.",
+      "Improved team visibility to reduce asset conflicts and speed up reviews.",
+    ],
+    links: [
+      // Optional: replace or remove later
+      { label: "LinkedIn Project", href: "https://www.linkedin.com/in/hyeonjoon-nam/" },
+    ],
+  },
   // ───────────────────────────────────────────
   // TCAS — The Children Are Sleeping
   // ───────────────────────────────────────────
