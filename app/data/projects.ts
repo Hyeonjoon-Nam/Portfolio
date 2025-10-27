@@ -4,7 +4,7 @@ import type { Project } from "./types";
 export const projects: Project[] = [
 {
     id: "ToV",                       // <- /ToV 라우트와 일치 (지금 구조 유지)
-    title: "Traid of Valor",
+    title: "Triad of Valor",
     thumb: undefined,                // no thumbnail yet; card will show a neutral block
     images: [],                      // empty until we have assets
     media: [],                       // (youtube/video) later
