@@ -2,12 +2,12 @@
 import type { Project } from "./types";
 
 export const projects: Project[] = [
-{
-    id: "ToV",                       // <- /ToV 라우트와 일치 (지금 구조 유지)
+  {
+    id: "ToV",
     title: "Triad of Valor",
-    thumb: undefined,                // no thumbnail yet; card will show a neutral block
-    images: [],                      // empty until we have assets
-    media: [],                       // (youtube/video) later
+    thumb: "/projects/_common/placeholder-16x9.webp",            // string 필수
+    images: ["/projects/_common/placeholder-16x9.webp"],         // 없어도 되지만 1장 넣어두면 안전
+    media: [],
     tagline: "UE5 co-op action (server-authoritative)",
     description:
       "Co-op action prototype under a server-authoritative model; I led QA automation and core combat/AI stabilization.",
@@ -26,10 +26,7 @@ export const projects: Project[] = [
       "Ensured deterministic hit resolution under replication/latency.",
       "Improved team visibility to reduce asset conflicts and speed up reviews.",
     ],
-    links: [
-      // Optional: replace or remove later
-      { label: "LinkedIn Project", href: "https://www.linkedin.com/in/hyeonjoon-nam/" },
-    ],
+    links: [{ label: "LinkedIn Project", href: "https://www.linkedin.com/in/hyeonjoon-nam/" }],
   },
   // ───────────────────────────────────────────
   // TCAS — The Children Are Sleeping
