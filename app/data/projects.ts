@@ -2,32 +2,73 @@
 import type { Project } from "./types";
 
 export const projects: Project[] = [
+  // ───────────────────────────────────────────
+  // Triad of Valor
+  // ───────────────────────────────────────────
   {
     id: "ToV",
     title: "Triad of Valor",
-    thumb: "/projects/_common/placeholder-16x9.webp",            // string 필수
-    images: ["/projects/_common/placeholder-16x9.webp"],         // 없어도 되지만 1장 넣어두면 안전
+    thumb: "/projects/_common/placeholder-16x9.webp",
+    images: ["/projects/_common/placeholder-16x9.webp"],
     media: [],
-    tagline: "UE5 co-op action (server-authoritative)",
+    tagline: "UE5 co-op MORPG with server-authoritative combat and QA automation.",
     description:
-      "Co-op action prototype under a server-authoritative model; I led QA automation and core combat/AI stabilization.",
-    role: "QA Lead",
+      "A 3D co-op MORPG prototype in Unreal Engine 5. As QA Lead and gameplay programmer, I built server-authoritative melee combat and integrated Perforce→Discord automation to keep the team in sync and reduce content conflicts.",
+    role: "QA Lead & Gameplay Programmer",
     team: "6-person team",
     tools:
       "C++, Unreal Engine 5, Perforce (Helix Core), Client-Server/RPC, Behavior Trees, AI Perception, Discord Webhooks",
     roles: [
-      "Implemented server-authoritative combat with AnimNotify-timed hit checks for deterministic results.",
-      "Set up a Perforce→Discord QA pipeline with scheduled commit detection and CI-style notifications.",
-      "Designed a user-mapped checkout monitor that posts opened-file reports to Discord, avoiding conflicts and tracking progress.",
-      "Unified player/enemy targeting via Perception + proximity services for smooth state transitions.",
-      "Validated multiplayer combat flow in PIE and dedicated-server tests.",
+      "QA lead and gameplay programmer on a 6-person Unreal Engine 5 MORPG project.",
+      "Implemented a server-authoritative melee combat system with AnimNotify-driven hit checks, performing overlap checks only on the server and multicasting results to clients.",
+      "Integrated my custom p4bot Perforce→Discord automation tool so artists and designers can see commits and checkouts in Discord without opening the Perforce client, reducing accidental content conflicts.",
+      "Coordinated QA scenarios and regression passes around combat, lock-on, and AI behavior in both single-player and multiplayer test sessions.",
     ],
     challenges: [
-      "Ensured deterministic hit resolution under replication/latency.",
-      "Improved team visibility to reduce asset conflicts and speed up reviews.",
+      "Needed deterministic hit resolution under network latency while keeping melee combat responsive and readable.",
+      "In an exclusive-lock Perforce setup, the team often stepped on each other’s work before we had better visibility into file activity.",
     ],
-    links: [{ label: "LinkedIn Project", href: "https://www.linkedin.com/in/hyeonjoon-nam/" }],
+    links: [
+      {
+        label: "LinkedIn Project",
+        href: "https://www.linkedin.com/in/hyeonjoon-nam/",
+      },
+    ],
   },
+
+  // ───────────────────────────────────────────
+  // p4bot — Perforce→Discord Automation Toolkit
+  // ───────────────────────────────────────────
+  {
+    id: "p4bot",
+    title: "p4bot — Perforce→Discord Automation Toolkit",
+    thumb: "/projects/_common/placeholder-16x9.webp",
+    images: ["/projects/_common/placeholder-16x9.webp"],
+    media: [],
+    tagline: "Self-hosted Perforce → Discord automation for lock checks and team awareness.",
+    description:
+      "A self-hosted automation toolkit that connects Perforce with Discord using the Perforce CLI, Python, PowerShell, and Windows Task Scheduler. It was built to reduce manual “who has this file?” overhead and make exclusive-lock workflows less painful for our Unreal Engine project.",
+    role: "Solo Developer",
+    team: "Used by a 6-person Triad of Valor team",
+    tools: "Python, PowerShell, Perforce CLI, Windows Task Scheduler, Discord Bot API",
+    roles: [
+      "Built a Perforce→Discord automation toolkit composed of a submit poller, an opened-file watcher, and a /canwork slash command so teammates can see recent changelists and who has which files checked out without leaving Discord.",
+      "Integrated with the Perforce CLI, Python, PowerShell, and Windows Task Scheduler so the toolkit can run unattended in the background on a self-hosted Windows machine.",
+      "Cut manual lock-check and “who has this file?” overhead from roughly 70–90 seconds (and sometimes several minutes) to a 1–3 second Discord glance, saving our 6-person team about 10–20 minutes per day over the term.",
+      "Designed a centralized JSON config so other teams can reuse or adapt the toolkit without hard-coded paths or secrets.",
+    ],
+    challenges: [
+      "In an exclusive-lock Perforce setup, artists and designers frequently blocked each other because file activity was invisible until someone manually checked the Perforce client.",
+      "Needed an automation solution that was reliable but simple enough to host on a student Windows machine without admin access or external services.",
+    ],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/Hyeonjoon-Nam/p4bot",
+      },
+    ],
+  },
+
   // ───────────────────────────────────────────
   // TCAS — The Children Are Sleeping
   // ───────────────────────────────────────────
@@ -37,21 +78,21 @@ export const projects: Project[] = [
     tagline: "UE5 first-person horror puzzle with weighted patrol AI.",
     thumb: "/projects/tcas/thumbs/thumb-1.webp",
     description:
-      "A first-person horror puzzle game built with Unreal Engine 5. As Tech Lead, I designed and implemented the AI behavior system, integrated interaction/persistence across systems, stabilized performance, and coordinated task priorities and cross-department collaboration.",
+      "A first-person horror puzzle game built with Unreal Engine 5. As tech lead and AI/gameplay programmer, I designed the monster behavior system, replaced random patrols with weighted loops to stabilize encounters, and coordinated a 4-person engineering team in a 13-person production.",
+    role: "Tech Lead & AI/Gameplay Programmer",
+    team: "Tech 4 / Art 5 / Design 4 — 13 total",
+    tools: "Unreal Engine 5, Behavior Trees, Perforce",
     roles: [
-      "AI Behavior System — four-phase monster AI (Patrol → Chase → Prediction → Capture) using Behavior Trees; Prediction continues pursuit after vision loss via last-known direction.",
-      "Weighted Patrol System — replaced random patrols with weighted loop transitions for fairness and route consistency; supports multiple loops (A/B/…) meeting at shared nodes O.",
-      "Interaction/Persistence Integration — applied persistent state to doors, puzzles, and interactables so states carry across level reloads.",
-      "Blueprint Refactor — consolidated redundant events/functions into reusable utility blueprints; cleaned event flow.",
-      "Cross-Team Collaboration — tuned behavior parameters with design; validated AI/FX timing with art; kept specs in sync.",
+      "Tech lead and AI/gameplay programmer on a 13-person Unreal Engine 5 horror puzzle project.",
+      "Designed a four-phase monster AI (Patrol → Chase → Prediction → Capture) in Behavior Trees; the Prediction phase continues pursuit along last-known direction after line-of-sight is broken.",
+      "Replaced naive random navmesh patrols with a weighted patrol system; on one of our main levels this brought first-encounter timing into a 12–48 second window (previously 30–100 seconds+) and stabilized encounters at around 2 per 3–5 minute run.",
+      "Exposed Behavior Tree parameters (FOV, wait times, loop weights) so designers could tune pacing directly without code changes.",
     ],
     challenges: [
-      "Unpredictable encounters from random patrols → weighted transitions at shared nodes to stabilize encounter frequency.",
-      "Abrupt chase drop after vision loss → added a Prediction phase for natural recovery to pursuit.",
-      "Object states resetting on level reload → integrated persistence data to restore interaction states consistently.",
-      "Gaps between design intent and AI movement → exposed BT parameters (FOV, wait time, loop weights) for designer-level tuning.",
+      "Random patrols produced unfairly long droughts or back-to-back encounters; the weighted loop system redistributed probability at shared nodes to get more predictable encounter pacing.",
+      "Early prototypes dropped chase immediately when vision broke; the Prediction phase preserves tension by continuing pursuit along the last known direction for a short window.",
+      "Designers needed to own pacing and tension without relying on programmers, so we surfaced key knobs directly in Behavior Tree services and blackboard values.",
     ],
-    // YouTube: 전체 URL로 넣어도 동작 (컴포넌트에서 ID 추출)
     media: [{ type: "youtube", src: "https://youtu.be/C3MexPR3Eyc" }],
     images: [
       "/projects/tcas/images/shot-1.webp",
@@ -59,9 +100,6 @@ export const projects: Project[] = [
       "/projects/tcas/images/shot-3.webp",
     ],
     links: [],
-    role: "Tech Lead",
-    team: "Tech 4 / Art 5 / Design 4 — 13 total",
-    tools: "Unreal Engine 5, Behavior Tree, Perforce",
   },
 
   // ───────────────────────────────────────────
@@ -70,22 +108,24 @@ export const projects: Project[] = [
   {
     id: "bastion",
     title: "Bastion",
-    tagline: "Custom C++ top-down defense with data-driven merge and boss states.",
+    tagline: "Custom C++ tower defense with data-driven waves and merge states.",
     thumb: "/projects/bastion/thumbs/thumb-1.webp",
     description:
-      "A top-down defense game on a custom C++ engine. As Tech Lead, I rebuilt the architecture mid-project, implemented monster/boss state machines, a unit merge system, and enabled data-driven iteration via a file parsing pipeline and in-engine tools.",
+      "A top-down defense game on a custom C++/OpenGL engine. As tech lead, I rebooted the architecture mid-project, implemented monster and boss state machines plus a data-driven merge system, and built a file-parsing pipeline that made wave balancing roughly 4× faster.",
+    role: "Tech Lead",
+    team: "5 members",
+    tools: "C++17, OpenGL, ImGui, CMake",
     roles: [
-      "State Machines — monster & boss states (Idle, Walk, Attack, Hit, Death; boss-specific Summon/Stun) with clear feedback via floating damage-text effects.",
-      "Unit & Merge System — defined melee/ranged/area/buff units as data; formalized merge rules, costs, and probabilities; live-tested with ImGui tools.",
-      "File Parsing Pipeline — external text-file parsing with validation to accelerate iteration and runtime parameter changes.",
-      "Refactor & Reboot — reorganized the codebase into modular, layer-based architecture; preserved stable core logic for safe reuse.",
+      "Implemented monster and boss state machines (Idle, Walk, Attack, Hit, Death; boss-only Summon/Stun) with clear feedback via floating damage-text effects.",
+      "Built a unit and merge system defining melee, ranged, area, and buff units as data, formalizing merge rules, costs, and probabilities and live-testing them with ImGui tools.",
+      "Moved wave configuration into external text files parsed at load, cutting the “save, build, and reload the level” loop from 62 seconds to 15–17 seconds (~4× faster) and making it much easier to retune wave timing and composition without touching C++ code.",
+      "Rebooted the project’s architecture into a more modular, layer-based layout, preserving stable core logic while cleaning up dependencies so new features were safer to add.",
     ],
     challenges: [
-      "Unstable or unclear transitions → explicit triggers/cooldowns and modular state logic.",
-      "Hard-coded balancing → moved tunables into files; iteration by editing tables instead of code.",
-      "Slow parameter testing → ImGui-based live tuning for immediate in-game feedback.",
+      "Unstable or unclear state transitions made combat feel random; explicit triggers, cooldowns, and modular state logic made behavior understandable and debuggable.",
+      "Hard-coded balance values made tuning slow and error-prone; moving tunables into external files let us iterate by editing tables instead of rebuilding code.",
+      "Parameter testing was slow without tooling; ImGui-based live tuning provided immediate in-game feedback for designers and programmers.",
     ],
-    // 로컬 mp4
     media: [{ type: "video", src: "/projects/bastion/videos/clip-8s.mp4" }],
     images: [
       "/projects/bastion/images/shot-1.webp",
@@ -93,9 +133,6 @@ export const projects: Project[] = [
       "/projects/bastion/images/shot-3.webp",
     ],
     links: [],
-    role: "Tech Lead",
-    team: "5 members",
-    tools: "C++17, OpenGL, ImGui, CMake",
   },
 
   // ───────────────────────────────────────────
@@ -104,21 +141,22 @@ export const projects: Project[] = [
   {
     id: "they-are",
     title: "They Are",
-    tagline: "2D strategic tower defense with dynamic A* and 99%+ singleton optimization.",
+    tagline: "2D strategic tower defense with A* pathfinding and 99%+ optimization.",
     thumb: "/projects/they-are/thumbs/thumb-1.webp",
     description:
-      "A 2D strategic tower defense where players control routes with obstacles and towers. As Tech Lead, I implemented A* pathfinding, optimized it by sharing computations through a singleton, and built the core tower, monster, and wave systems.",
+      "A 2D strategic tower defense where players control routes with obstacles and towers. As tech lead, I implemented A* pathfinding, optimized it by sharing computations across enemies, and built the core tower, monster, and wave systems.",
+    role: "Tech Lead",
+    team: "5 members",
+    tools: "C++, OpenGL, STL",
     roles: [
-      "Pathfinding (A*) — real-time dynamic path updates that react to obstacle placement.",
-      "Singleton Optimization — shared the A* graph/cache via a singleton, removing redundant work and achieving over 99% performance improvement.",
-      "Core Systems — tower placement/removal/upgrade, wave scheduling, monster spawning/behavior.",
-      "File Parsing & Debug — text-file parsing for fast iteration and a visual path debugger for testing.",
+      "Implemented grid-based A* pathfinding with dynamic updates when the player placed or removed obstacles.",
+      "Optimized enemy pathfinding by computing a single shared path for all enemies whenever the map changed, reducing A* calls from 24,000 to 1 in a 100-enemy benchmark and cutting total pathfinding CPU time from 8.4s to 0.65ms while keeping paths identical.",
+      "Built core tower and wave systems (placement/removal/upgrade, wave scheduling, monster spawning) plus a text-file driven configuration system and an in-engine path visualizer for debugging.",
     ],
     challenges: [
-      "Heavy per-frame recalculation → unified path data in a shared singleton/cache to eliminate duplicates and cut cost.",
-      "Path blockage from obstacle placement → pre-placement validation to reject impossible or unfair placements.",
+      "Naive per-enemy per-frame pathfinding blew up CPU cost; caching and sharing the path eliminated redundant work while preserving behavior.",
+      "Players could block all routes with obstacles, so we added pre-placement validation and fallback rules to prevent impossible or unfair maps.",
     ],
-    // 로컬 mp4
     media: [{ type: "video", src: "/projects/they-are/videos/clip-8s.mp4" }],
     images: [
       "/projects/they-are/images/shot-1.webp",
@@ -126,9 +164,6 @@ export const projects: Project[] = [
       "/projects/they-are/images/shot-3.webp",
     ],
     links: [],
-    role: "Tech Lead",
-    team: "5 members",
-    tools: "C++, OpenGL, STL",
   },
 
   // ───────────────────────────────────────────
@@ -137,21 +172,23 @@ export const projects: Project[] = [
   {
     id: "suspense-defense",
     title: "Suspense Defense",
-    tagline: "Custom C++ wave-based defense with procedural maps and a Mediator messaging hub.",
+    tagline: "Custom C++ wave-based defense with procedural maps and a Mediator hub.",
     thumb: "/projects/suspense-defense/thumbs/thumb-1.webp",
     description:
-      "A wave-based action defense built on a custom C++ engine. As Tech Lead, I designed procedural map generation, A*-based movement, monster/wave systems, and a Mediator-pattern messaging hub to decouple subsystems under engine constraints.",
+      "A wave-based action defense game built on a custom C++ engine. As tech lead, I designed procedural map generation, A*-based movement, monster and wave systems, and a Mediator-pattern messaging hub to decouple subsystems under tight engine constraints.",
+    role: "Tech Lead",
+    team: "4 members",
+    tools: "C++, Custom Engine, CMake",
     roles: [
-      "Procedural Map Generation — seeded random maps with guaranteed start–end connectivity and difficulty-curve alignment.",
-      "Pathfinding & Waves — A*-based routing and wave timing to control difficulty.",
-      "Mediator Architecture — lightweight event hub that reduces coupling and centralizes communication.",
-      "Tile-Based Physics — wall collision and projectile reflection with minimal overhead.",
-      "Debug & Replay — seed/wave reproducibility and a simple replay path for quick scenario verification.",
+      "Built a custom C++ tower defense engine with a Mediator-style manager coordinating turrets, enemies, and projectiles.",
+      "Added procedural level layouts using cellular automata with guaranteed start–end connectivity and difficulty-curve alignment.",
+      "Implemented A*-based enemy routing and wave timing to control difficulty and keep encounters readable.",
+      "Used a lightweight Mediator/event hub to reduce coupling between subsystems and centralize communication.",
     ],
     challenges: [
-      "Tight subsystem coupling → applied Mediator pattern to isolate communication and unify routing.",
-      "Randomness causing unstable difficulty → constrained generation with seed and curve parameters.",
-      "Occasional blocked routes → regeneration/reroute rules to ensure valid paths.",
+      "Tightly coupled subsystems made changes risky; applying a Mediator pattern isolated communication and simplified routing.",
+      "Purely random generation caused unstable difficulty; we constrained generation with seed and curve parameters to keep runs fair.",
+      "Occasional blocked routes required regeneration and validation rules to ensure there was always a valid path to the goal.",
     ],
     media: [{ type: "youtube", src: "_2lPt6jRqoE" }],
     images: [
@@ -160,11 +197,14 @@ export const projects: Project[] = [
       "/projects/suspense-defense/images/shot-3.webp",
     ],
     links: [
-      { label: "GitHub", href: "https://github.com/Junhyeongkimm/Suspense_defense" },
-      { label: "Demo Video", href: "https://youtu.be/_2lPt6jRqoE" },
+      {
+        label: "GitHub",
+        href: "https://github.com/Junhyeongkimm/Suspense_defense",
+      },
+      {
+        label: "Demo Video",
+        href: "https://youtu.be/_2lPt6jRqoE",
+      },
     ],
-    role: "Tech Lead",
-    team: "4 members",
-    tools: "C++, Custom Engine, CMake",
   },
 ];
