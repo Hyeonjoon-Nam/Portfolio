@@ -37,5 +37,4 @@ nav::-webkit-scrollbar-thumb {
 }
 
 
-/* 전역 스무스 스크롤 */
 html { scroll-behavior: smooth; }
