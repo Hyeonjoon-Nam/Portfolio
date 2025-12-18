@@ -8,9 +8,13 @@ export const projects: Project[] = [
   {
     id: "ToV",
     title: "Triad of Valor",
-    thumb: "/projects/_common/placeholder-16x9.webp",
-    images: ["/projects/_common/placeholder-16x9.webp"],
-    media: [],
+    thumb: "/projects/ToV/thumbs/thumb-1.webp",
+    images: [
+      "/projects/ToV/images/shot-1.webp",
+      "/projects/ToV/images/shot-2.webp",
+      "/projects/ToV/images/shot-3.webp",
+    ],
+    media: [{ type: "youtube", src: "https://youtu.be/o7JMrh1nwco" }],
     tagline: "UE5 co-op MORPG with server-authoritative combat and QA automation.",
     description:
       "A 3D co-op MORPG prototype in Unreal Engine 5. As QA Lead and gameplay programmer, I built server-authoritative melee combat and integrated Perforce→Discord automation to keep the team in sync and reduce content conflicts.",
@@ -21,7 +25,7 @@ export const projects: Project[] = [
     roles: [
       "QA lead and gameplay programmer on a 6-person Unreal Engine 5 MORPG project.",
       "Implemented a server-authoritative melee combat system with AnimNotify-driven hit checks, performing overlap checks only on the server and multicasting results to clients.",
-      "Integrated my custom p4bot Perforce→Discord automation tool so artists and designers can see commits and checkouts in Discord without opening the Perforce client, reducing accidental content conflicts.",
+      "Integrated Perforce→Discord automation to surface changelists and checkouts in Discord, reducing content conflicts in an exclusive-lock workflow.",
       "Coordinated QA scenarios and regression passes around combat, lock-on, and AI behavior in both single-player and multiplayer test sessions.",
     ],
     challenges: [
@@ -30,8 +34,8 @@ export const projects: Project[] = [
     ],
     links: [
       {
-        label: "LinkedIn Project",
-        href: "https://www.linkedin.com/in/hyeonjoon-nam/",
+        label: "YouTube Demo",
+        href: "https://youtu.be/o7JMrh1nwco",
       },
     ],
   },
@@ -42,9 +46,13 @@ export const projects: Project[] = [
   {
     id: "p4bot",
     title: "p4bot — Perforce→Discord Automation Toolkit",
-    thumb: "/projects/_common/placeholder-16x9.webp",
-    images: ["/projects/_common/placeholder-16x9.webp"],
-    media: [],
+    thumb: "/projects/p4bot/thumbs/thumb-1.webp",
+    images: [
+      "/projects/p4bot/images/shot-1.webp",
+      "/projects/p4bot/images/shot-2.webp",
+      "/projects/p4bot/images/shot-3.webp",
+    ],
+    media: [{ type: "youtube", src: "https://youtu.be/kMe77iYMMTM" }],
     tagline: "Self-hosted Perforce → Discord automation for lock checks and team awareness.",
     description:
       "A self-hosted automation toolkit that connects Perforce with Discord using the Perforce CLI, Python, PowerShell, and Windows Task Scheduler. It was built to reduce manual “who has this file?” overhead and make exclusive-lock workflows less painful for our Unreal Engine project.",
@@ -65,6 +73,55 @@ export const projects: Project[] = [
       {
         label: "GitHub",
         href: "https://github.com/Hyeonjoon-Nam/p4bot",
+      },
+      {
+        label: "YouTube Demo",
+        href: "https://youtu.be/kMe77iYMMTM",
+      },
+    ],
+  },
+
+  // ───────────────────────────────────────────
+  // Spell It Out
+  // ───────────────────────────────────────────
+  {
+    id: "spell-it-out",
+    title: "Spell It Out",
+    tagline: "Unity gesture-based spell casting prototype, deployed to WebGL on itch.io.",
+    thumb: "/projects/spell-it-out/thumbs/thumb-1.webp",
+    description:
+      "Gesture-based spell casting prototype built in Unity. Originally developed for Nintendo Switch (Dev Kit) as a CS388 final project, then rebuilt as a public PC/Web version for touch & mouse-based gesture recognition and deployed to itch.io.",
+    role: "Gameplay Programmer (Gesture Recognition & Deployment)",
+    team: "CS388 Final Project",
+    tools: "Unity, C#, Gesture Recognition, WebGL, GitHub Actions (GameCI), butler, itch.io",
+    roles: [
+      "Built a stroke capture pipeline (touch/mouse) and a recognition layer that normalizes and resamples strokes for stable matching.",
+      "Implemented direction encoding + template matching so new spells can be added by updating templates instead of modifying C# logic.",
+      "Set up CI/CD: GitHub Actions builds WebGL (GameCI unity-builder) and publishes to itch.io via butler on pushes to main.",
+    ],
+    challenges: [
+      "Reduced noisy and inconsistent stroke input by normalizing and resampling to a stable representation before matching.",
+      "Improved tuning speed with on-screen debug visualization (stroke rendering and match scores) to see why gestures failed.",
+      "Shipped a public version without Nintendo Switch SDK dependencies while preserving the core gesture and gameplay loop.",
+    ],
+    media: [{ type: "youtube", src: "https://youtu.be/9m7i7XsUOeg" }],
+    images: [
+      "/projects/spell-it-out/images/shot-1.webp",
+      "/projects/spell-it-out/images/shot-2.webp",
+      "/projects/spell-it-out/images/shot-3.webp",
+    ],
+    links: [
+      {
+        label: "Play (itch.io)",
+        href: "https://hyeonjoon-nam.itch.io/spell-it-out",
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/Hyeonjoon-Nam/SpellItOut",
+      },
+      {
+        label: "YouTube Demo (YouTube)",
+        href: "https://youtu.be/9m7i7XsUOeg",
       },
     ],
   },
@@ -99,7 +156,12 @@ export const projects: Project[] = [
       "/projects/tcas/images/shot-2.webp",
       "/projects/tcas/images/shot-3.webp",
     ],
-    links: [],
+    links: [
+      {
+        label: "Trailer (YouTube)",
+        href: "https://youtu.be/C3MexPR3Eyc",
+      },
+    ],
   },
 
   // ───────────────────────────────────────────
@@ -132,7 +194,12 @@ export const projects: Project[] = [
       "/projects/bastion/images/shot-2.webp",
       "/projects/bastion/images/shot-3.webp",
     ],
-    links: [],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/Hyeonjoon-Nam/GAM250-TheyAre-Bastion",
+      },
+    ],
   },
 
   // ───────────────────────────────────────────
@@ -163,7 +230,16 @@ export const projects: Project[] = [
       "/projects/they-are/images/shot-2.webp",
       "/projects/they-are/images/shot-3.webp",
     ],
-    links: [],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/Hyeonjoon-Nam/GAM250-TheyAre-Bastion",
+      },
+      {
+        label: "Release (they-are-1.0)",
+        href: "https://github.com/Hyeonjoon-Nam/GAM250-TheyAre-Bastion/releases/tag/they-are-1.0",
+      },
+    ],
   },
 
   // ───────────────────────────────────────────
