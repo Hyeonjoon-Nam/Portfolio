@@ -81,26 +81,26 @@ export const projects: Project[] = [
     ],
   },
 
-  // ───────────────────────────────────────────
+// ───────────────────────────────────────────
   // Spell It Out
   // ───────────────────────────────────────────
   {
     id: "spell-it-out",
     title: "Spell It Out",
-    tagline: "Unity gesture-based spell casting prototype, deployed to WebGL on itch.io.",
+    tagline: "Unity gesture-based spell casting prototype featuring a robust, DP-based matching algorithm.",
     thumb: "/projects/spell-it-out/thumbs/thumb-1.webp",
     description:
       "Gesture-based spell casting prototype built in Unity. Originally developed for Nintendo Switch (Dev Kit) as a CS388 final project, then rebuilt as a public PC/Web version for touch & mouse-based gesture recognition and deployed to itch.io.",
     role: "Gameplay Programmer (Gesture Recognition & Deployment)",
     team: "CS388 Final Project",
-    tools: "Unity, C#, Gesture Recognition, WebGL, GitHub Actions (GameCI), butler, itch.io",
+    tools: "Unity, C#, Weighted Levenshtein Distance, Dynamic Programming, WebGL, GitHub Actions, itch.io",
     roles: [
       "Built a stroke capture pipeline (touch/mouse) and a recognition layer that normalizes and resamples strokes for stable matching.",
-      "Implemented direction encoding + template matching so new spells can be added by updating templates instead of modifying C# logic.",
+      "Engineered a robust gesture recognition system using Weighted Levenshtein Distance (Dynamic Programming), providing high tolerance for noisy or shaky input by calculating minimal edit costs between sequences.",
       "Set up CI/CD: GitHub Actions builds WebGL (GameCI unity-builder) and publishes to itch.io via butler on pushes to main.",
     ],
     challenges: [
-      "Reduced noisy and inconsistent stroke input by normalizing and resampling to a stable representation before matching.",
+      "Resolved recognition failures caused by inconsistent stroke length (shaky input) by implementing a space-optimized (2-row) DP approach to handle insertion, deletion, and substitution of direction tokens in real-time.",
       "Improved tuning speed with on-screen debug visualization (stroke rendering and match scores) to see why gestures failed.",
       "Shipped a public version without Nintendo Switch SDK dependencies while preserving the core gesture and gameplay loop.",
     ],
