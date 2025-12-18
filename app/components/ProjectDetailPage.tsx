@@ -19,10 +19,15 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
   const hasRoles = Array.isArray(p.roles) && p.roles.length > 0;
   const hasChallenges = Array.isArray(p.challenges) && p.challenges.length > 0;
 
-  const primaryImage = hasImages ? p.images![0] : null;
   const firstMedia = hasMedia ? p.media![0] : null;
   const youTubeId =
     firstMedia?.type === "youtube" ? getYouTubeId(firstMedia.src) : null;
+
+  // Decide if the top media section should render at all.
+  // Rule: Only render when an explicit media item exists (YouTube/video).
+  const showTopMedia =
+    !!firstMedia &&
+    ((firstMedia.type === "youtube" && !!youTubeId) || firstMedia.type === "video");
 
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100">
@@ -37,10 +42,10 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
         <h1 className="text-3xl md:text-4xl font-bold">{p.title}</h1>
         {p.tagline && <p className="mt-2 text-zinc-400">{p.tagline}</p>}
 
-        {/* Media on top: YouTube/Video → fallback Image */}
-        <div className="mt-6">
-          {firstMedia ? (
-            firstMedia.type === "youtube" && youTubeId ? (
+        {/* Top Media: Only show if YouTube/Video exists. No image fallback. */}
+        {showTopMedia && (
+          <div className="mt-6">
+            {firstMedia!.type === "youtube" && youTubeId ? (
               <div className="w-full aspect-video rounded-xl overflow-hidden">
                 <iframe
                   className="w-full h-full"
@@ -50,33 +55,21 @@ export default function ProjectDetailPage({ p }: { p: Project }) {
                   allowFullScreen
                 />
               </div>
-            ) : firstMedia.type === "video" ? (
+            ) : firstMedia!.type === "video" ? (
               <video
                 className="w-full rounded-xl"
-                src={firstMedia.src}
+                src={firstMedia!.src}
                 loop
                 muted
                 playsInline
                 controls
               />
-            ) : null
-          ) : primaryImage ? (
-            <div className="relative w-full rounded-xl overflow-hidden">
-              <Image
-                src={primaryImage}
-                alt={`${p.title} preview`}
-                width={1280}
-                height={720}
-                className="w-full h-auto"
-                priority={false}
-                sizes="100vw"
-              />
-            </div>
-          ) : null}
-        </div>
+            ) : null}
+          </div>
+        )}
 
         <section className="mt-10">
-          <h2 className="text-xl font-semibold">What is this game?</h2>
+          <h2 className="text-xl font-semibold">What is this?</h2>
           <p className="mt-2 text-zinc-300">{p.description}</p>
         </section>
 
