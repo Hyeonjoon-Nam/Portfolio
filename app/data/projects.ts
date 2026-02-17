@@ -150,6 +150,27 @@ export const projects: Project[] = [
     ]
   },
   {
+    id: "bastion",
+    title: "Bastion",
+    thumb: "/projects/bastion/thumbs/thumb-1.webp",
+    tagline: "Custom C++ Game Engine used for They Are.",
+    description: "A custom 2D game engine built from scratch using C++ and OpenGL. Features ECS architecture and custom physics.",
+    role: "Engine Programmer",
+    team: "Team Project",
+    tools: "C++, OpenGL, ImGui",
+    roles: [
+      "Developed core ECS architecture.",
+      "Implemented rendering pipeline using OpenGL.",
+    ],
+    links: [],
+    featured: false,
+    images: [
+      "/projects/bastion/images/shot-1.webp",
+      "/projects/bastion/images/shot-2.webp",
+      "/projects/bastion/images/shot-3.webp",
+    ]
+  },
+  {
     id: "suspense-defense",
     title: "Suspense Defense",
     thumb: "/projects/suspense-defense/thumbs/thumb-1.webp",
