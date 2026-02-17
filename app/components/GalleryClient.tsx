@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
-// 라이트박스는 동적 로드 (SSR 제외)
 const GalleryLightbox = dynamic(() => import("./GalleryLightbox"), { ssr: false });
 
 export default function GalleryClient({ title, images }: { title: string; images: string[] }) {
@@ -20,7 +19,6 @@ export default function GalleryClient({ title, images }: { title: string; images
 
   return (
     <>
-      {/* 썸네일 그리드 */}
       <div className="mt-3 grid grid-cols-2 md:grid-cols-3 gap-3">
         {images.map((src, i) => (
           <button
@@ -40,7 +38,6 @@ export default function GalleryClient({ title, images }: { title: string; images
         ))}
       </div>
 
-      {/* 라이트박스 */}
       <GalleryLightbox
         open={open}
         images={images}

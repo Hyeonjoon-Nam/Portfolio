@@ -41,7 +41,6 @@ export default function GalleryLightbox({ open, images, index, onClose, onPrev, 
         className="relative w-full max-w-5xl h-[70vh] md:h-[80vh] bg-black/40 rounded-2xl overflow-hidden border border-white/10"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* 큰 이미지 */}
         <div className="relative w-full h-full">
           <Image
             src={imgSrc}
@@ -53,7 +52,6 @@ export default function GalleryLightbox({ open, images, index, onClose, onPrev, 
           />
         </div>
 
-        {/* 닫기 버튼 */}
         <button
           ref={closeBtnRef}
           onClick={onClose}
@@ -63,7 +61,6 @@ export default function GalleryLightbox({ open, images, index, onClose, onPrev, 
           ✕
         </button>
 
-        {/* 좌/우 버튼 */}
         <button
           onClick={onPrev}
           aria-label="Previous image"
@@ -79,7 +76,6 @@ export default function GalleryLightbox({ open, images, index, onClose, onPrev, 
           →
         </button>
 
-        {/* 하단 인디케이터 */}
         <div className="absolute bottom-3 left-0 right-0 text-center text-xs text-white/80">
           {index + 1} / {images.length}
         </div>

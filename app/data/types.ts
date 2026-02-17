@@ -1,33 +1,18 @@
-// app/data/types.ts
-
-export type Media = {
-  type: "youtube" | "video";
-  src: string;
-};
-
-export type Link = {
-  label: string;
-  href: string;
-};
-
-export type Project = {
+export interface Project {
   id: string;
   title: string;
-  tagline?: string;
   thumb: string;
+  tagline: string;
   description: string;
-
-  // content
+  role: string;
+  team: string;
+  tools: string;
   roles: string[];
-  challenges: string[];
-
-  // optional media & assets
-  media?: Media[];
+  links: { label: string; href: string }[];
+  featured: boolean; // New field for filtering Main vs. Other projects
+  
+  // Optional fields for detail pages
+  media?: { type: "youtube" | "video"; src: string }[];
   images?: string[];
-  links?: Link[];
-
-  // NEW: Team Info (optional fields)
-  role?: string;   // e.g., "Tech Lead"
-  team?: string;   // e.g., "Tech 4 / Art 5 / Design 4 — 13 total"
-  tools?: string;  // e.g., "Unreal Engine 5, Behavior Tree, Perforce"
-};
+  challenges?: string[];
+}

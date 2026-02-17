@@ -1,169 +1,184 @@
+"use client";
+
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "../data/types";
-import GalleryClient from "./GalleryClient";
+import YouTubeLite from "./YouTubeLite";
 
-function getYouTubeId(src: string): string | null {
-  if (!src) return null;
-  if (/^[a-zA-Z0-9_-]{8,}$/.test(src)) return src;
-  const m =
-    src.match(
-      /(?:youtube\.com\/.*[?&]v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{8,})/
-    ) || [];
-  return m[1] || null;
-}
-
-export default function ProjectDetailPage({ p }: { p: Project }) {
-  const hasMedia = Array.isArray(p.media) && p.media.length > 0;
-  const hasImages = Array.isArray(p.images) && p.images.length > 0;
-  const hasRoles = Array.isArray(p.roles) && p.roles.length > 0;
-  const hasChallenges = Array.isArray(p.challenges) && p.challenges.length > 0;
-
-  const firstMedia = hasMedia ? p.media![0] : null;
-  const youTubeId =
-    firstMedia?.type === "youtube" ? getYouTubeId(firstMedia.src) : null;
-
-  // Decide if the top media section should render at all.
-  // Rule: Only render when an explicit media item exists (YouTube/video).
-  const showTopMedia =
-    !!firstMedia &&
-    ((firstMedia.type === "youtube" && !!youTubeId) || firstMedia.type === "video");
+export default function ProjectDetailPage({ project }: { project: Project }) {
+  if (!project) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-zinc-950 text-white">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Project Not Found</h1>
+          <Link href="/#projects" className="text-blue-400 hover:underline">
+            ← Back to Projects
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-100">
-      <div className="max-w-5xl mx-auto px-5 py-10">
-        <Link
-          href="/"
-          className="inline-block text-sm mb-6 text-white/80 hover:text-white underline underline-offset-4"
-        >
-          ← Back to Home
-        </Link>
+    <main className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-blue-500/30">
+      
+      {/* ─────────────────────────────────────────────────────────────
+          HEADER SECTION
+      ───────────────────────────────────────────────────────────── */}
+      <div className="relative pt-32 pb-20 px-6 border-b border-zinc-800 bg-zinc-900/20">
+        <div className="max-w-5xl mx-auto text-center">
+          <Link 
+            href="/#projects" 
+            className="inline-flex items-center text-sm text-zinc-500 hover:text-blue-400 mb-8 transition-colors"
+          >
+            ← Back to Projects
+          </Link>
+          
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-4">
+            {project.title}
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-zinc-400 font-light max-w-3xl mx-auto">
+            {project.tagline}
+          </p>
 
-        <h1 className="text-3xl md:text-4xl font-bold">{p.title}</h1>
-        {p.tagline && <p className="mt-2 text-zinc-400">{p.tagline}</p>}
+          <div className="flex flex-wrap justify-center gap-4 mt-8">
+            {project.links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-colors"
+              >
+                {link.label} ↗
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
 
-        {/* Top Media: Only show if YouTube/Video exists. No image fallback. */}
-        {showTopMedia && (
-          <div className="mt-6">
-            {firstMedia!.type === "youtube" && youTubeId ? (
-              <div className="w-full aspect-video rounded-xl overflow-hidden">
-                <iframe
-                  className="w-full h-full"
-                  src={`https://www.youtube-nocookie.com/embed/${youTubeId}`}
-                  title={`${p.title} video`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+      <div className="max-w-5xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-3 gap-16">
+        
+        {/* ─────────────────────────────────────────────────────────────
+            LEFT COLUMN: Main Content
+        ───────────────────────────────────────────────────────────── */}
+        <div className="lg:col-span-2 space-y-16">
+          
+          {/* 1. MEDIA (YouTube or Main Image) */}
+          <div className="rounded-2xl overflow-hidden border border-zinc-800 bg-black shadow-2xl">
+             {project.media?.some(m => m.type === 'youtube') ? (
+                <YouTubeLite id={project.media.find(m => m.type === 'youtube')!.src} title={project.title} />
+             ) : (
+                <div className="relative aspect-video">
+                  <Image 
+                    src={project.thumb || "/projects/_common/placeholder-16x9.webp"} 
+                    alt={project.title} 
+                    fill 
+                    className="object-cover" 
+                  />
+                </div>
+             )}
+          </div>
+
+          {/* 2. OVERVIEW */}
+          <section>
+            <h2 className="text-2xl font-bold text-white mb-6 border-l-4 border-blue-500 pl-4">
+              Overview
+            </h2>
+            <p className="text-lg text-zinc-300 leading-relaxed whitespace-pre-line">
+              {project.description}
+            </p>
+          </section>
+
+          {/* 3. KEY CONTRIBUTIONS */}
+          <section>
+            <h2 className="text-2xl font-bold text-white mb-6 border-l-4 border-purple-500 pl-4">
+              Key Engineering Contributions
+            </h2>
+            <ul className="space-y-4">
+              {project.roles.map((role, idx) => (
+                <li key={idx} className="flex items-start gap-3 bg-zinc-900/50 p-4 rounded-xl border border-zinc-800/50 hover:border-zinc-700 transition-colors">
+                  <span className="text-blue-400 mt-1 flex-shrink-0">▹</span>
+                  <span className="text-zinc-300 leading-relaxed">{role}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* 4. TECHNICAL CHALLENGES */}
+          {project.challenges && project.challenges.length > 0 && (
+            <section>
+              <h2 className="text-2xl font-bold text-white mb-6 border-l-4 border-red-500 pl-4">
+                Technical Challenges
+              </h2>
+              <div className="space-y-6">
+                {project.challenges.map((challenge, idx) => (
+                  <div key={idx} className="bg-zinc-900/30 p-6 rounded-2xl border border-zinc-800">
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      {challenge}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ) : firstMedia!.type === "video" ? (
-              <video
-                className="w-full rounded-xl"
-                src={firstMedia!.src}
-                loop
-                muted
-                playsInline
-                controls
-              />
-            ) : null}
-          </div>
-        )}
+            </section>
+          )}
 
-        <section className="mt-10">
-          <h2 className="text-xl font-semibold">What is this?</h2>
-          <p className="mt-2 text-zinc-300">{p.description}</p>
-        </section>
+          {/* 5. IMAGE GALLERY */}
+          {project.images && project.images.length > 0 && (
+             <section>
+               <h2 className="text-2xl font-bold text-white mb-6">Gallery</h2>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                 {project.images.map((img, idx) => (
+                   <div key={idx} className="relative aspect-video rounded-lg overflow-hidden border border-zinc-800 group">
+                      <Image 
+                        src={img} 
+                        alt={`Screenshot ${idx + 1}`} 
+                        fill 
+                        className="object-cover group-hover:scale-105 transition-transform duration-500" 
+                      />
+                   </div>
+                 ))}
+               </div>
+             </section>
+          )}
 
-        {(p.role || p.team || p.tools) && (
-          <section className="mt-10">
-            <h2 className="text-xl font-semibold">Team Info</h2>
-            <ul className="mt-2 text-zinc-300 space-y-1">
-              {p.role && (
-                <li>
-                  <span className="font-medium">Role:</span> {p.role}
-                </li>
-              )}
-              {p.team && (
-                <li>
-                  <span className="font-medium">Team:</span> {p.team}
-                </li>
-              )}
-              {p.tools && (
-                <li>
-                  <span className="font-medium">Engine/Tools:</span> {p.tools}
-                </li>
-              )}
-            </ul>
-          </section>
-        )}
+        </div>
 
-        {hasRoles && (
-          <section className="mt-10">
-            <h2 className="text-xl font-semibold">Contributions</h2>
-            <ul className="mt-2 list-disc list-outside pl-6 text-zinc-300 space-y-1">
-              {p.roles!.map((r) => (
-                <li key={r}>{r}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {hasChallenges && (
-          <section className="mt-10">
-            <h2 className="text-xl font-semibold">Challenges &amp; Solutions</h2>
-            <ul className="mt-2 list-disc list-outside pl-6 text-zinc-300 space-y-1">
-              {p.challenges!.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {hasImages && (
-          <section className="mt-10">
-            <h2 className="text-xl font-semibold">Gallery</h2>
-            <div className="mt-3">
-              <GalleryClient title={p.title} images={p.images!} />
+        {/* ─────────────────────────────────────────────────────────────
+            RIGHT COLUMN: Meta Info (Sticky Sidebar)
+        ───────────────────────────────────────────────────────────── */}
+        <div className="lg:col-span-1">
+          <div className="sticky top-24 space-y-8 p-6 bg-zinc-900/40 rounded-2xl border border-zinc-800 backdrop-blur-sm">
+            
+            <div>
+              <h3 className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-2">Role</h3>
+              <p className="text-white font-medium">{project.role}</p>
             </div>
-          </section>
-        )}
 
-        {!!p.links?.length && (
-          <section className="mt-10">
-            <h2 className="text-xl font-semibold">Links</h2>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {p.links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-3 py-1.5 rounded-lg border border-zinc-700 hover:bg-white/10"
-                >
-                  {l.label}
-                </a>
-              ))}
+            <div>
+              <h3 className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-2">Team Size</h3>
+              <p className="text-white font-medium">{project.team}</p>
             </div>
-          </section>
-        )}
 
-        <section id="contact" className="mt-16 scroll-mt-20">
-          <h2 className="text-xl md:text-2xl font-semibold text-center">Contact</h2>
-          <p className="mt-3 text-center text-zinc-400">Feel free to reach out.</p>
-          <div className="mt-6 flex flex-col items-center gap-2">
-            <a
-              href="mailto:hyeonjoon.nam.dev@gmail.com"
-              className="underline underline-offset-4 hover:text-white"
-            >
-              hyeonjoon.nam.dev@gmail.com
-            </a>
-            <a
-              href="tel:+12067867888"
-              className="underline underline-offset-4 hover:text-white"
-            >
-              (206) 786 7888
-            </a>
+            <div>
+              <h3 className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-2">Tech Stack</h3>
+              <div className="flex flex-wrap gap-2">
+                {project.tools.split(',').map((tool) => (
+                  <span 
+                    key={tool} 
+                    className="px-3 py-1 bg-blue-500/10 text-blue-300 text-xs font-semibold rounded-full border border-blue-500/20"
+                  >
+                    {tool.trim()}
+                  </span>
+                ))}
+              </div>
+            </div>
+
           </div>
-        </section>
+        </div>
+
       </div>
     </main>
   );

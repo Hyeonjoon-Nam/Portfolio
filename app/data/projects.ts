@@ -1,286 +1,173 @@
-// app/data/projects.ts
 import type { Project } from "./types";
 
 export const projects: Project[] = [
-  // ───────────────────────────────────────────
-  // Triad of Valor
-  // ───────────────────────────────────────────
+  // --------------------------------------------------------------------------
+  // FEATURED PROJECTS (System Software / C++ / Optimization)
+  // --------------------------------------------------------------------------
+  {
+    id: "hpc-simulation",
+    title: "Heterogeneous HPC Simulation System",
+    thumb: "/projects/hpc/thumbs/thumb-1.webp", // Ensure asset exists
+    tagline: "GPGPU Boids simulation with bare-metal MCU hardware integration.",
+    description: "A real-time GPGPU simulation system bridging AVR-based hardware input with CUDA-accelerated kernels. Focused on maximizing throughput and decoupling I/O latency.",
+    role: "Individual Developer",
+    team: "Individual Project",
+    tools: "C++, CUDA, AVR (ATmega328P), Win32 API, Nsight Compute",
+    roles: [
+      "Engineered a real-time Boids simulation for 1.04M particles (1024x1024) at 50 FPS, achieving 85.23% Compute Throughput on an RTX 3070 via CUDA Uniform Grid partitioning.",
+      "Developed bare-metal firmware for ATmega328P by directly manipulating AVR registers (UBRR0, ADMUX, ADCSRA) for high-speed UART, bypassing standard library overhead.",
+      "Implemented a lock-free synchronization pipeline using std::atomic and Win32 Serial API to decouple hardware I/O from the high-frequency GPU rendering loop."
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/Cuda-Study-Journey" },
+      { label: "YouTube Demo", href: "https://youtu.be/WqSGCowUWgY" }
+    ],
+    featured: true
+  },
   {
     id: "ToV",
     title: "Triad of Valor",
     thumb: "/projects/ToV/thumbs/thumb-1.webp",
+    tagline: "High-fidelity UE5 MORPG optimized for performance.",
+    description: "A 3D co-op MORPG in Unreal Engine 5. Focused on resolving critical rendering bottlenecks and automating designer workflows.",
+    role: "QA Lead / Gameplay Programmer",
+    team: "6-person multi-disciplinary team",
+    tools: "C++, Unreal Engine 5, Unreal Insights, Lumen, VSM, p4bot",
+    roles: [
+      "Optimized GPU rendering time from 40ms to 23ms (42% reduction) by profiling via Unreal Insights and fine-tuning Lumen and Virtual Shadow Map (VSM) parameters.",
+      "Architected a data-driven enemy variation system using DataTables and OnConstruction scripts, reducing manual blueprint iteration time by 90%.",
+      "Integrated p4bot to provide real-time lock visibility, saving each member 15+ minutes of daily idle time.",
+      "Resolved intermittent race condition crashes in event delegate binding through defensive coding and synchronized cleanup."
+    ],
+    links: [
+      { label: "YouTube Demo", href: "https://youtu.be/o7JMrh1nwco" }
+    ],
+    featured: true,
+    media: [{ type: "youtube", src: "https://youtu.be/o7JMrh1nwco" }],
     images: [
       "/projects/ToV/images/shot-1.webp",
       "/projects/ToV/images/shot-2.webp",
       "/projects/ToV/images/shot-3.webp",
-    ],
-    media: [{ type: "youtube", src: "https://youtu.be/o7JMrh1nwco" }],
-    tagline: "UE5 co-op MORPG with server-authoritative combat and QA automation.",
-    description:
-      "A 3D co-op MORPG prototype in Unreal Engine 5. As QA Lead and gameplay programmer, I built server-authoritative melee combat and integrated Perforce→Discord automation to keep the team in sync and reduce content conflicts.",
-    role: "QA Lead & Gameplay Programmer",
-    team: "6-person team",
-    tools:
-      "C++, Unreal Engine 5, Perforce (Helix Core), Client-Server/RPC, Behavior Trees, AI Perception, Discord Webhooks",
-    roles: [
-      "QA lead and gameplay programmer on a 6-person Unreal Engine 5 MORPG project.",
-      "Implemented a server-authoritative melee combat system with AnimNotify-driven hit checks, performing overlap checks only on the server and multicasting results to clients.",
-      "Integrated Perforce→Discord automation to surface changelists and checkouts in Discord, reducing content conflicts in an exclusive-lock workflow.",
-      "Coordinated QA scenarios and regression passes around combat, lock-on, and AI behavior in both single-player and multiplayer test sessions.",
-    ],
-    challenges: [
-      "Needed deterministic hit resolution under network latency while keeping melee combat responsive and readable.",
-      "In an exclusive-lock Perforce setup, the team often stepped on each other’s work before we had better visibility into file activity.",
-    ],
-    links: [
-      {
-        label: "YouTube Demo",
-        href: "https://youtu.be/o7JMrh1nwco",
-      },
-    ],
+    ]
   },
-
-  // ───────────────────────────────────────────
-  // p4bot — Perforce→Discord Automation Toolkit
-  // ───────────────────────────────────────────
-  {
-    id: "p4bot",
-    title: "p4bot — Perforce→Discord Automation Toolkit",
-    thumb: "/projects/p4bot/thumbs/thumb-1.webp",
-    images: [
-      "/projects/p4bot/images/shot-1.webp",
-      "/projects/p4bot/images/shot-2.webp",
-      "/projects/p4bot/images/shot-3.webp",
-    ],
-    media: [{ type: "youtube", src: "https://youtu.be/kMe77iYMMTM" }],
-    tagline: "Self-hosted Perforce → Discord automation for lock checks and team awareness.",
-    description:
-      "A self-hosted automation toolkit that connects Perforce with Discord using the Perforce CLI, Python, PowerShell, and Windows Task Scheduler. It was built to reduce manual “who has this file?” overhead and make exclusive-lock workflows less painful for our Unreal Engine project.",
-    role: "Solo Developer",
-    team: "Used by a 6-person Triad of Valor team",
-    tools: "Python, PowerShell, Perforce CLI, Windows Task Scheduler, Discord Bot API",
-    roles: [
-      "Built a Perforce→Discord automation toolkit composed of a submit poller, an opened-file watcher, and a /canwork slash command so teammates can see recent changelists and who has which files checked out without leaving Discord.",
-      "Integrated with the Perforce CLI, Python, PowerShell, and Windows Task Scheduler so the toolkit can run unattended in the background on a self-hosted Windows machine.",
-      "Cut manual lock-check and “who has this file?” overhead from roughly 70–90 seconds (and sometimes several minutes) to a 1–3 second Discord glance, saving our 6-person team about 10–20 minutes per day over the term.",
-      "Designed a centralized JSON config so other teams can reuse or adapt the toolkit without hard-coded paths or secrets.",
-    ],
-    challenges: [
-      "In an exclusive-lock Perforce setup, artists and designers frequently blocked each other because file activity was invisible until someone manually checked the Perforce client.",
-      "Needed an automation solution that was reliable but simple enough to host on a student Windows machine without admin access or external services.",
-    ],
-    links: [
-      {
-        label: "GitHub",
-        href: "https://github.com/Hyeonjoon-Nam/p4bot",
-      },
-      {
-        label: "YouTube Demo",
-        href: "https://youtu.be/kMe77iYMMTM",
-      },
-    ],
-  },
-
-// ───────────────────────────────────────────
-  // Spell It Out
-  // ───────────────────────────────────────────
-  {
-    id: "spell-it-out",
-    title: "Spell It Out",
-    tagline: "Unity gesture-based spell casting prototype featuring a robust, DP-based matching algorithm.",
-    thumb: "/projects/spell-it-out/thumbs/thumb-1.webp",
-    description:
-      "Gesture-based spell casting prototype built in Unity. Originally developed for Nintendo Switch (Dev Kit) as a CS388 final project, then rebuilt as a public PC/Web version for touch & mouse-based gesture recognition and deployed to itch.io.",
-    role: "Gameplay Programmer (Gesture Recognition & Deployment)",
-    team: "CS388 Final Project",
-    tools: "Unity, C#, Weighted Levenshtein Distance, Dynamic Programming, WebGL, GitHub Actions, itch.io",
-    roles: [
-      "Built a stroke capture pipeline (touch/mouse) and a recognition layer that normalizes and resamples strokes for stable matching.",
-      "Engineered a robust gesture recognition system using Weighted Levenshtein Distance (Dynamic Programming), providing high tolerance for noisy or shaky input by calculating minimal edit costs between sequences.",
-      "Set up CI/CD: GitHub Actions builds WebGL (GameCI unity-builder) and publishes to itch.io via butler on pushes to main.",
-    ],
-    challenges: [
-      "Resolved recognition failures caused by inconsistent stroke length (shaky input) by implementing a space-optimized (2-row) DP approach to handle insertion, deletion, and substitution of direction tokens in real-time.",
-      "Improved tuning speed with on-screen debug visualization (stroke rendering and match scores) to see why gestures failed.",
-      "Shipped a public version without Nintendo Switch SDK dependencies while preserving the core gesture and gameplay loop.",
-    ],
-    media: [{ type: "youtube", src: "https://youtu.be/9m7i7XsUOeg" }],
-    images: [
-      "/projects/spell-it-out/images/shot-1.webp",
-      "/projects/spell-it-out/images/shot-2.webp",
-      "/projects/spell-it-out/images/shot-3.webp",
-    ],
-    links: [
-      {
-        label: "Play (itch.io)",
-        href: "https://hyeonjoon-nam.itch.io/spell-it-out",
-      },
-      {
-        label: "GitHub",
-        href: "https://github.com/Hyeonjoon-Nam/SpellItOut",
-      },
-      {
-        label: "YouTube Demo (YouTube)",
-        href: "https://youtu.be/9m7i7XsUOeg",
-      },
-    ],
-  },
-
-  // ───────────────────────────────────────────
-  // TCAS — The Children Are Sleeping
-  // ───────────────────────────────────────────
   {
     id: "tcas",
     title: "The Children Are Sleeping",
-    tagline: "UE5 first-person horror puzzle with weighted patrol AI.",
     thumb: "/projects/tcas/thumbs/thumb-1.webp",
-    description:
-      "A first-person horror puzzle game built with Unreal Engine 5. As tech lead and AI/gameplay programmer, I designed the monster behavior system, replaced random patrols with weighted loops to stabilize encounters, and coordinated a 4-person engineering team in a 13-person production.",
-    role: "Tech Lead & AI/Gameplay Programmer",
-    team: "Tech 4 / Art 5 / Design 4 — 13 total",
-    tools: "Unreal Engine 5, Behavior Trees, Perforce",
+    tagline: "Tech leadership for a UE5 horror project with stabilized AI systems.",
+    description: "A first-person horror puzzle game. I managed the technical pipeline and optimized AI pacing to ensure consistent player tension.",
+    role: "Tech Lead / Gameplay Programmer",
+    team: "12-person studio (Tech 4 / Art 5 / Design 4)",
+    tools: "Unreal Engine 5, Behavior Trees, Perforce, Excel",
     roles: [
-      "Tech lead and AI/gameplay programmer on a 13-person Unreal Engine 5 horror puzzle project.",
-      "Designed a four-phase monster AI (Patrol → Chase → Prediction → Capture) in Behavior Trees; the Prediction phase continues pursuit along last-known direction after line-of-sight is broken.",
-      "Replaced naive random navmesh patrols with a weighted patrol system; on one of our main levels this brought first-encounter timing into a 12–48 second window (previously 30–100 seconds+) and stabilized encounters at around 2 per 3–5 minute run.",
-      "Exposed Behavior Tree parameters (FOV, wait times, loop weights) so designers could tune pacing directly without code changes.",
+      "Spearheaded a 4-person engineering team, managing technical roadmaps and cross-discipline coordination via Excel-based tracking.",
+      "Facilitated weekly cross-discipline meetings with Art and Design to negotiate technical scopes and maintain development trajectory.",
+      "Engineered a weighted patrol system via Behavior Trees, stabilizing first-encounter timing to a 12–48s window (improved from 30–100s)."
     ],
-    challenges: [
-      "Random patrols produced unfairly long droughts or back-to-back encounters; the weighted loop system redistributed probability at shared nodes to get more predictable encounter pacing.",
-      "Early prototypes dropped chase immediately when vision broke; the Prediction phase preserves tension by continuing pursuit along the last known direction for a short window.",
-      "Designers needed to own pacing and tension without relying on programmers, so we surfaced key knobs directly in Behavior Tree services and blackboard values.",
+    links: [
+      { label: "YouTube Demo", href: "https://youtu.be/C3MexPR3Eyc" }
     ],
+    featured: true,
     media: [{ type: "youtube", src: "https://youtu.be/C3MexPR3Eyc" }],
     images: [
       "/projects/tcas/images/shot-1.webp",
       "/projects/tcas/images/shot-2.webp",
       "/projects/tcas/images/shot-3.webp",
-    ],
-    links: [
-      {
-        label: "Trailer (YouTube)",
-        href: "https://youtu.be/C3MexPR3Eyc",
-      },
-    ],
+    ]
   },
-
-  // ───────────────────────────────────────────
-  // Bastion
-  // ───────────────────────────────────────────
-  {
-    id: "bastion",
-    title: "Bastion",
-    tagline: "Custom C++ tower defense with data-driven waves and merge states.",
-    thumb: "/projects/bastion/thumbs/thumb-1.webp",
-    description:
-      "A top-down defense game on a custom C++/OpenGL engine. As tech lead, I rebooted the architecture mid-project, implemented monster and boss state machines plus a data-driven merge system, and built a file-parsing pipeline that made wave balancing roughly 4× faster.",
-    role: "Tech Lead",
-    team: "5 members",
-    tools: "C++17, OpenGL, ImGui, CMake",
-    roles: [
-      "Implemented monster and boss state machines (Idle, Walk, Attack, Hit, Death; boss-only Summon/Stun) with clear feedback via floating damage-text effects.",
-      "Built a unit and merge system defining melee, ranged, area, and buff units as data, formalizing merge rules, costs, and probabilities and live-testing them with ImGui tools.",
-      "Moved wave configuration into external text files parsed at load, cutting the “save, build, and reload the level” loop from 62 seconds to 15–17 seconds (~4× faster) and making it much easier to retune wave timing and composition without touching C++ code.",
-      "Rebooted the project’s architecture into a more modular, layer-based layout, preserving stable core logic while cleaning up dependencies so new features were safer to add.",
-    ],
-    challenges: [
-      "Unstable or unclear state transitions made combat feel random; explicit triggers, cooldowns, and modular state logic made behavior understandable and debuggable.",
-      "Hard-coded balance values made tuning slow and error-prone; moving tunables into external files let us iterate by editing tables instead of rebuilding code.",
-      "Parameter testing was slow without tooling; ImGui-based live tuning provided immediate in-game feedback for designers and programmers.",
-    ],
-    media: [{ type: "video", src: "/projects/bastion/videos/clip-8s.mp4" }],
-    images: [
-      "/projects/bastion/images/shot-1.webp",
-      "/projects/bastion/images/shot-2.webp",
-      "/projects/bastion/images/shot-3.webp",
-    ],
-    links: [
-      {
-        label: "GitHub",
-        href: "https://github.com/Hyeonjoon-Nam/GAM250-TheyAre-Bastion",
-      },
-    ],
-  },
-
-  // ───────────────────────────────────────────
-  // They Are
-  // ───────────────────────────────────────────
   {
     id: "they-are",
-    title: "They Are",
-    tagline: "2D strategic tower defense with A* pathfinding and 99%+ optimization.",
+    title: "Exodia - They Are",
     thumb: "/projects/they-are/thumbs/thumb-1.webp",
-    description:
-      "A 2D strategic tower defense where players control routes with obstacles and towers. As tech lead, I implemented A* pathfinding, optimized it by sharing computations across enemies, and built the core tower, monster, and wave systems.",
-    role: "Tech Lead",
-    team: "5 members",
-    tools: "C++, OpenGL, STL",
+    tagline: "Massive-scale RTS pathfinding on a custom C++ engine.",
+    description: "A strategic defense game featuring 1,000+ units. Led technical development focusing on algorithm optimization and engine limits.",
+    role: "Tech Lead / Gameplay Programmer",
+    team: "5-person engineering team",
+    tools: "C++, OpenGL, Custom Engine, A* Pathfinding",
     roles: [
-      "Implemented grid-based A* pathfinding with dynamic updates when the player placed or removed obstacles.",
-      "Optimized enemy pathfinding by computing a single shared path for all enemies whenever the map changed, reducing A* calls from 24,000 to 1 in a 100-enemy benchmark and cutting total pathfinding CPU time from 8.4s to 0.65ms while keeping paths identical.",
-      "Built core tower and wave systems (placement/removal/upgrade, wave scheduling, monster spawning) plus a text-file driven configuration system and an in-engine path visualizer for debugging.",
+      "Led a 5-person engineering team, prioritizing milestones and conducting rigorous code reviews.",
+      "Achieved stable 60 FPS with 100+ active units by optimizing CPU pathfinding latency from 8.4s to 0.65ms.",
+      "Conducted system-wide stress tests at 1,000+ unit scales to define the engine’s theoretical performance ceiling."
     ],
-    challenges: [
-      "Naive per-enemy per-frame pathfinding blew up CPU cost; caching and sharing the path eliminated redundant work while preserving behavior.",
-      "Players could block all routes with obstacles, so we added pre-placement validation and fallback rules to prevent impossible or unfair maps.",
+    links: [
+      { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/GAM250-TheyAre-Bastion" }
     ],
+    featured: true,
     media: [{ type: "video", src: "/projects/they-are/videos/clip-8s.mp4" }],
     images: [
       "/projects/they-are/images/shot-1.webp",
       "/projects/they-are/images/shot-2.webp",
       "/projects/they-are/images/shot-3.webp",
+    ]
+  },
+  {
+    id: "p4bot",
+    title: "p4bot — DevOps Infrastructure",
+    thumb: "/projects/p4bot/thumbs/thumb-1.webp",
+    tagline: "Containerized Perforce-Discord automation service.",
+    description: "An infrastructure service bridging Perforce and Discord to streamline team communication and asset management.",
+    role: "Individual Developer",
+    team: "Infrastructure Tool",
+    tools: "Python, Docker, Jenkins, Perforce CLI, Discord API",
+    roles: [
+      "Developed a real-time monitoring system for Perforce depot activity and exclusive-locks, featuring Slash Commands (/canwork).",
+      "Architected a Jenkins CI/CD pipeline with automated session renewal to ensure 24/7 uptime without manual intervention.",
+      "Containerized the service using Docker to provide an environment-agnostic, cross-platform execution layer."
     ],
     links: [
-      {
-        label: "GitHub",
-        href: "https://github.com/Hyeonjoon-Nam/GAM250-TheyAre-Bastion",
-      },
-      {
-        label: "Release (they-are-1.0)",
-        href: "https://github.com/Hyeonjoon-Nam/GAM250-TheyAre-Bastion/releases/tag/they-are-1.0",
-      },
+      { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/p4bot" }
     ],
+    featured: true,
+    images: [
+      "/projects/p4bot/images/shot-1.webp",
+      "/projects/p4bot/images/shot-2.webp",
+      "/projects/p4bot/images/shot-3.webp",
+    ]
   },
 
-  // ───────────────────────────────────────────
-  // Suspense Defense
-  // ───────────────────────────────────────────
+  // --------------------------------------------------------------------------
+  // OTHER PROJECTS (Archived / Game Logic Focus)
+  // --------------------------------------------------------------------------
+  {
+    id: "spell-it-out",
+    title: "Spell It Out",
+    thumb: "/projects/spell-it-out/thumbs/thumb-1.webp",
+    tagline: "Educational word game with polished UI/UX.",
+    description: "A word-based educational game built to provide an engaging learning experience through interactive mechanics.",
+    role: "Gameplay Programmer",
+    team: "Student Project",
+    tools: "Unity, C#",
+    roles: [
+      "Implemented core word-matching logic and score systems.",
+      "Polished UI/UX transitions for better accessibility."
+    ],
+    links: [],
+    featured: false,
+    images: [
+      "/projects/spell-it-out/images/shot-1.webp",
+      "/projects/spell-it-out/images/shot-2.webp",
+      "/projects/spell-it-out/images/shot-3.webp",
+    ]
+  },
   {
     id: "suspense-defense",
     title: "Suspense Defense",
-    tagline: "Custom C++ wave-based defense with procedural maps and a Mediator hub.",
     thumb: "/projects/suspense-defense/thumbs/thumb-1.webp",
-    description:
-      "A wave-based action defense game built on a custom C++ engine. As tech lead, I designed procedural map generation, A*-based movement, monster and wave systems, and a Mediator-pattern messaging hub to decouple subsystems under tight engine constraints.",
-    role: "Tech Lead",
-    team: "4 members",
-    tools: "C++, Custom Engine, CMake",
+    tagline: "Tactical defense game with procedural waves.",
+    description: "A strategy game where players defend against waves of enemies using various tactical tools.",
+    role: "Gameplay Programmer",
+    team: "Student Project",
+    tools: "Unity, C#",
     roles: [
-      "Built a custom C++ tower defense engine with a Mediator-style manager coordinating turrets, enemies, and projectiles.",
-      "Added procedural level layouts using cellular automata with guaranteed start–end connectivity and difficulty-curve alignment.",
-      "Implemented A*-based enemy routing and wave timing to control difficulty and keep encounters readable.",
-      "Used a lightweight Mediator/event hub to reduce coupling between subsystems and centralize communication.",
+      "Developed procedural wave generation algorithms.",
+      "Balanced game difficulty through iterative testing."
     ],
-    challenges: [
-      "Tightly coupled subsystems made changes risky; applying a Mediator pattern isolated communication and simplified routing.",
-      "Purely random generation caused unstable difficulty; we constrained generation with seed and curve parameters to keep runs fair.",
-      "Occasional blocked routes required regeneration and validation rules to ensure there was always a valid path to the goal.",
-    ],
-    media: [{ type: "youtube", src: "_2lPt6jRqoE" }],
+    links: [],
+    featured: false,
     images: [
       "/projects/suspense-defense/images/shot-1.webp",
       "/projects/suspense-defense/images/shot-2.webp",
       "/projects/suspense-defense/images/shot-3.webp",
-    ],
-    links: [
-      {
-        label: "GitHub",
-        href: "https://github.com/Junhyeongkimm/Suspense_defense",
-      },
-      {
-        label: "Demo Video",
-        href: "https://youtu.be/_2lPt6jRqoE",
-      },
-    ],
-  },
+    ]
+  }
 ];

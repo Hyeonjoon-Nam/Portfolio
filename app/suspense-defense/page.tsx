@@ -1,29 +1,18 @@
-// app/suspense-defense/page.tsx
+import React from "react";
 import { projects } from "../data/projects";
 import ProjectDetailPage from "../components/ProjectDetailPage";
 
-const cover = "/projects/suspense-defense/thumbs/thumb-1.webp";
-const desc =
-  "Wave-based action defense on a custom C++ engine. As Tech Lead, built procedural map generation, A*-based movement, and a Mediator-pattern messaging hub.";
+// id must match the one in projects.ts
+const project = projects.find((p) => p.id === "suspense-defense");
 
-export const metadata = {
-  title: "Suspense Defense — Hyeonjoon Nam",
-  description: desc,
-  openGraph: {
-    title: "Suspense Defense — Hyeonjoon Nam",
-    description: desc,
-    images: [cover],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Suspense Defense — Hyeonjoon Nam",
-    description: desc,
-    images: [cover],
-  },
-};
+export default function Page() {
+  if (!project) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-zinc-950 text-white">
+        Project not found
+      </div>
+    );
+  }
 
-export default function SuspenseDefensePage() {
-  const p = projects.find((x) => x.id === "suspense-defense");
-  if (!p) return <main className="p-8">Project not found.</main>;
-  return <ProjectDetailPage p={p} />;
+  return <ProjectDetailPage project={project} />;
 }
