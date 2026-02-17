@@ -22,6 +22,7 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/Cuda-Study-Journey" },
       { label: "YouTube Demo", href: "https://youtu.be/WqSGCowUWgY" }
     ],
+    media: [{ type: "youtube", src: "https://youtu.be/WqSGCowUWgY" }],
     featured: true
   },
   {
@@ -40,7 +41,7 @@ export const projects: Project[] = [
       "Resolved intermittent race condition crashes in event delegate binding through defensive coding and synchronized cleanup."
     ],
     links: [
-      { label: "YouTube Demo", href: "https://youtu.be/o7JMrh1nwco" }
+      { label: "YouTube Demo", href: "https://youtu.be/o7JMrh1nwco" },
     ],
     featured: true,
     media: [{ type: "youtube", src: "https://youtu.be/o7JMrh1nwco" }],
@@ -57,7 +58,7 @@ export const projects: Project[] = [
     tagline: "Tech leadership for a UE5 horror project with stabilized AI systems.",
     description: "A first-person horror puzzle game. I managed the technical pipeline and optimized AI pacing to ensure consistent player tension.",
     role: "Tech Lead / Gameplay Programmer",
-    team: "12-person studio (Tech 4 / Art 5 / Design 4)",
+    team: "13-person studio (Tech 4 / Art 5 / Design 4)",
     tools: "Unreal Engine 5, Behavior Trees, Perforce, Excel",
     roles: [
       "Spearheaded a 4-person engineering team, managing technical roadmaps and cross-discipline coordination via Excel-based tracking.",
@@ -115,9 +116,11 @@ export const projects: Project[] = [
       "Containerized the service using Docker to provide an environment-agnostic, cross-platform execution layer."
     ],
     links: [
-      { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/p4bot" }
+      { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/p4bot" },
+      { label: "YouTube Demo", href: "https://youtu.be/kMe77iYMMTM" }
     ],
     featured: true,
+    media: [{ type: "youtube", src: "https://youtu.be/kMe77iYMMTM" }],
     images: [
       "/projects/p4bot/images/shot-1.webp",
       "/projects/p4bot/images/shot-2.webp",
@@ -141,8 +144,12 @@ export const projects: Project[] = [
       "Implemented core word-matching logic and score systems.",
       "Polished UI/UX transitions for better accessibility."
     ],
-    links: [],
+    links: [
+      { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/SpellItOut" },
+      { label: "YouTube Demo", href: "https://youtu.be/9m7i7XsUOeg" }
+    ],
     featured: false,
+    media: [{ type: "youtube", src: "https://youtu.be/9m7i7XsUOeg" }],
     images: [
       "/projects/spell-it-out/images/shot-1.webp",
       "/projects/spell-it-out/images/shot-2.webp",
@@ -151,19 +158,24 @@ export const projects: Project[] = [
   },
   {
     id: "bastion",
-    title: "Bastion",
+    title: "Bastion Game Engine",
     thumb: "/projects/bastion/thumbs/thumb-1.webp",
-    tagline: "Custom C++ Game Engine used for They Are.",
-    description: "A custom 2D game engine built from scratch using C++ and OpenGL. Features ECS architecture and custom physics.",
-    role: "Engine Programmer",
-    team: "Team Project",
-    tools: "C++, OpenGL, ImGui",
+    tagline: "Custom C++ Engine focused on iteration speed and data-driven architecture.",
+    description: "A custom 2D game engine built from scratch using C++ and OpenGL. Focused on solving development bottlenecks by implementing a data-driven pipeline that allows designers to tweak game balance without recompilation.",
+    role: "Engine Programmer & Tech Lead",
+    team: "5-person Team (Reboot Project)",
+    tools: "C++, OpenGL, ImGui, FMOD, Data-Driven Design",
     roles: [
-      "Developed core ECS architecture.",
-      "Implemented rendering pipeline using OpenGL.",
+      "Engineered a data-driven loading layer that parses wave configurations from external text files, reducing the iteration loop (Save-Build-Reload) from 62s to 15s (4x improvement).",
+      "Led a technical reboot of the codebase, analyzing legacy systems to salvage reusable components while redesigning the core architecture for modularity.",
+      "Developed an in-game editor using ImGui, enabling real-time unit placement and property tuning to streamline the design workflow.",
+      "Implemented a base-class hierarchy for 24 upgradeable units, decoupling logic to ensure scalability and ease of maintenance."
     ],
-    links: [],
+    links: [
+      { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/GAM250-TheyAre-Bastion" }
+    ],
     featured: false,
+    media: [{ type: "video", src: "/projects/bastion/videos/clip-8s.mp4" }],
     images: [
       "/projects/bastion/images/shot-1.webp",
       "/projects/bastion/images/shot-2.webp",
@@ -178,17 +190,46 @@ export const projects: Project[] = [
     description: "A strategy game where players defend against waves of enemies using various tactical tools.",
     role: "Gameplay Programmer",
     team: "Student Project",
-    tools: "Unity, C#",
+    tools: "Custom C++ Engine, C++",
     roles: [
       "Developed procedural wave generation algorithms.",
       "Balanced game difficulty through iterative testing."
     ],
-    links: [],
+    links: [
+      { label: "GitHub", href: "https://github.com/Junhyeongkimm/Suspense_defense" },
+      { label: "YouTube Demo", href: "https://youtu.be/_2lPt6jRqoE" }
+    ],
     featured: false,
+    media: [{ type: "youtube", src: "https://youtu.be/_2lPt6jRqoE" }],
     images: [
       "/projects/suspense-defense/images/shot-1.webp",
       "/projects/suspense-defense/images/shot-2.webp",
       "/projects/suspense-defense/images/shot-3.webp",
+    ]
+  },
+  {
+    id: "that-game-jam",
+    title: "Still Reaching",
+    thumb: "/projects/that-game-jam/thumbs/thumb-1.webp",
+    tagline: "Co-op puzzle platformer built in 48 hours using Godot.",
+    description: "A rapid prototyping project created for a Game Jam (Dec 2025). Focused on cooperative mechanics where two players must swap skills and use portals to solve puzzles.",
+    role: "Gameplay & Tools Programmer",
+    team: "4-person Team (Game Jam)",
+    tools: "Godot (GDScript), GitHub",
+    roles: [
+      "Developed a custom Level Editor with Save/Load functionality to enable rapid level design iterations for the team.",
+      "Implemented core puzzle mechanics including Portals, Interactive Buttons/Doors, and a Skill-Swap system.",
+      "Built the Audio Manager and UI navigation systems (Pause, Settings, Main Menu) to ensure a polished user experience within the jam timeframe."
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/thatgamejam_01" },
+      { label: "YouTube Demo", href: "https://youtu.be/hB2F7u6Q99A" }
+    ],
+    media: [{ type: "youtube", src: "https://youtu.be/hB2F7u6Q99A" }],
+    featured: false,
+    images: [
+      "/projects/that-game-jam/images/shot-1.webp",
+      "/projects/that-game-jam/images/shot-2.webp"
     ]
   }
 ];
