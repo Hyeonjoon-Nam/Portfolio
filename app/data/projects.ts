@@ -1,15 +1,15 @@
 import type { Project } from "./types";
 
 export const projects: Project[] = [
-  // --------------------------------------------------------------------------
-  // FEATURED PROJECTS (System Software / C++ / Optimization)
-  // --------------------------------------------------------------------------
+  // ───────────────────────────────────────────
+  // FEATURED PROJECTS (Aligned with Resume)
+  // ───────────────────────────────────────────
   {
     id: "hpc-simulation",
     title: "Heterogeneous HPC Simulation System",
-    thumb: "/projects/hpc/thumbs/thumb-1.webp", // Ensure asset exists
+    thumb: "/projects/hpc/thumbs/thumb-1.webp",
     tagline: "GPGPU Boids simulation with bare-metal MCU hardware integration.",
-    description: "A real-time GPGPU simulation system bridging AVR-based hardware input with CUDA-accelerated kernels. Focused on maximizing throughput and decoupling I/O latency.",
+    description: "A real-time GPGPU simulation system bridging AVR-based hardware input with CUDA-accelerated kernels. Focused on maximizing throughput and decoupling I/O latency, successfully managing 1.04M particles at interactive framerates.",
     role: "Individual Developer",
     team: "Individual Project",
     tools: "C++, CUDA, AVR (ATmega328P), Win32 API, Nsight Compute",
@@ -43,8 +43,8 @@ export const projects: Project[] = [
     links: [
       { label: "YouTube Demo", href: "https://youtu.be/o7JMrh1nwco" },
     ],
-    featured: true,
     media: [{ type: "youtube", src: "https://youtu.be/o7JMrh1nwco" }],
+    featured: true,
     images: [
       "/projects/ToV/images/shot-1.webp",
       "/projects/ToV/images/shot-2.webp",
@@ -68,8 +68,8 @@ export const projects: Project[] = [
     links: [
       { label: "YouTube Demo", href: "https://youtu.be/C3MexPR3Eyc" }
     ],
-    featured: true,
     media: [{ type: "youtube", src: "https://youtu.be/C3MexPR3Eyc" }],
+    featured: true,
     images: [
       "/projects/tcas/images/shot-1.webp",
       "/projects/tcas/images/shot-2.webp",
@@ -78,7 +78,7 @@ export const projects: Project[] = [
   },
   {
     id: "they-are",
-    title: "Exodia - They Are",
+    title: "They Are",
     thumb: "/projects/they-are/thumbs/thumb-1.webp",
     tagline: "Massive-scale RTS pathfinding on a custom C++ engine.",
     description: "A strategic defense game featuring 1,000+ units. Led technical development focusing on algorithm optimization and engine limits.",
@@ -87,14 +87,14 @@ export const projects: Project[] = [
     tools: "C++, OpenGL, Custom Engine, A* Pathfinding",
     roles: [
       "Led a 5-person engineering team, prioritizing milestones and conducting rigorous code reviews.",
-      "Achieved stable 60 FPS with 100+ active units by optimizing CPU pathfinding latency from 8.4s to 0.65ms.",
+      "Achieved stable 60 FPS with 100+ active units by optimizing CPU pathfinding latency from 8.4s to 0.65ms using a Singleton-based shared path manager.",
       "Conducted system-wide stress tests at 1,000+ unit scales to define the engine’s theoretical performance ceiling."
     ],
     links: [
       { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/GAM250-TheyAre-Bastion" }
     ],
-    featured: true,
     media: [{ type: "video", src: "/projects/they-are/videos/clip-8s.mp4" }],
+    featured: true,
     images: [
       "/projects/they-are/images/shot-1.webp",
       "/projects/they-are/images/shot-2.webp",
@@ -119,8 +119,8 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/p4bot" },
       { label: "YouTube Demo", href: "https://youtu.be/kMe77iYMMTM" }
     ],
-    featured: true,
     media: [{ type: "youtube", src: "https://youtu.be/kMe77iYMMTM" }],
+    featured: true,
     images: [
       "/projects/p4bot/images/shot-1.webp",
       "/projects/p4bot/images/shot-2.webp",
@@ -128,28 +128,31 @@ export const projects: Project[] = [
     ]
   },
 
-  // --------------------------------------------------------------------------
-  // OTHER PROJECTS (Archived / Game Logic Focus)
-  // --------------------------------------------------------------------------
+  // ───────────────────────────────────────────
+  // OTHER PROJECTS (Archive / Tech Demos)
+  // ───────────────────────────────────────────
+  
   {
     id: "spell-it-out",
     title: "Spell It Out",
     thumb: "/projects/spell-it-out/thumbs/thumb-1.webp",
-    tagline: "Educational word game with polished UI/UX.",
-    description: "A word-based educational game built to provide an engaging learning experience through interactive mechanics.",
-    role: "Gameplay Programmer",
-    team: "Student Project",
-    tools: "Unity, C#",
+    tagline: "Gesture Recognition Algorithm (Nintendo Switch Project).",
+    description: "An action game originally developed using Unity and Nintendo Switch Dev Kits. Focused on translating raw gyro sensor data into complex 8-directional combat gestures. \n\n(Note: The public GitHub repository contains a PC-ported version; Nintendo-specific code has been removed for NDA compliance.)",
+    role: "Gameplay Programmer (Input Systems)",
+    team: "CS388 Student Project (Nintendo Dev)",
+    tools: "Unity, C# (Nintendo SDK omitted), GitHub Actions",
     roles: [
-      "Implemented core word-matching logic and score systems.",
-      "Polished UI/UX transitions for better accessibility."
+      "Implemented a custom Motion-to-Stroke recognition algorithm, converting raw accelerometer/gyro data into quantized directional vectors for combat input.",
+      "Developed a resilient stroke matching system using weighted edit distance to handle variability in player gestures.",
+      "Engineered a CI/CD pipeline using GitHub Actions to automate WebGL builds and deployment to itch.io for rapid testing."
     ],
     links: [
-      { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/SpellItOut" },
-      { label: "YouTube Demo", href: "https://youtu.be/9m7i7XsUOeg" }
+      { label: "GitHub (Public)", href: "https://github.com/Hyeonjoon-Nam/SpellItOut" },
+      { label: "YouTube Demo", href: "https://youtu.be/9m7i7XsUOeg" },
+      { label: "Play on Itch.io", href: "https://hyeonjoon-nam.itch.io/spell-it-out" }
     ],
-    featured: false,
     media: [{ type: "youtube", src: "https://youtu.be/9m7i7XsUOeg" }],
+    featured: false,
     images: [
       "/projects/spell-it-out/images/shot-1.webp",
       "/projects/spell-it-out/images/shot-2.webp",
@@ -158,24 +161,23 @@ export const projects: Project[] = [
   },
   {
     id: "bastion",
-    title: "Bastion Game Engine",
+    title: "Bastion",
     thumb: "/projects/bastion/thumbs/thumb-1.webp",
-    tagline: "Custom C++ Engine focused on iteration speed and data-driven architecture.",
-    description: "A custom 2D game engine built from scratch using C++ and OpenGL. Focused on solving development bottlenecks by implementing a data-driven pipeline that allows designers to tweak game balance without recompilation.",
+    tagline: "Custom C++ Game Engine: Data-driven architecture overhaul.",
+    description: "A strategic defense game built on a custom C++ engine. This project was a complete technical reboot of 'They Are', focusing on architectural refactoring and maximizing development efficiency.",
     role: "Engine Programmer & Tech Lead",
-    team: "5-person Team (Reboot Project)",
+    team: "5-person Team (Engine Reboot)",
     tools: "C++, OpenGL, ImGui, FMOD, Data-Driven Design",
     roles: [
-      "Engineered a data-driven loading layer that parses wave configurations from external text files, reducing the iteration loop (Save-Build-Reload) from 62s to 15s (4x improvement).",
-      "Led a technical reboot of the codebase, analyzing legacy systems to salvage reusable components while redesigning the core architecture for modularity.",
-      "Developed an in-game editor using ImGui, enabling real-time unit placement and property tuning to streamline the design workflow.",
-      "Implemented a base-class hierarchy for 24 upgradeable units, decoupling logic to ensure scalability and ease of maintenance."
+      "Led the technical reboot, analyzing legacy code to salvage reusable rendering/ECS cores while redesigning the gameplay layer for modularity.",
+      "Engineered a data-driven loading system that parses external configuration files, reducing the 'Save-Build-Reload' iteration loop from 62s to 15s (4x faster).",
+      "Developed an in-game editor using ImGui for real-time unit placement and balancing, decoupling design iteration from code compilation."
     ],
     links: [
       { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/GAM250-TheyAre-Bastion" }
     ],
-    featured: false,
     media: [{ type: "video", src: "/projects/bastion/videos/clip-8s.mp4" }],
+    featured: false,
     images: [
       "/projects/bastion/images/shot-1.webp",
       "/projects/bastion/images/shot-2.webp",
@@ -186,21 +188,22 @@ export const projects: Project[] = [
     id: "suspense-defense",
     title: "Suspense Defense",
     thumb: "/projects/suspense-defense/thumbs/thumb-1.webp",
-    tagline: "Tactical defense game with procedural waves.",
-    description: "A strategy game where players defend against waves of enemies using various tactical tools.",
+    tagline: "Freshman Project: Procedural Maps & A* from scratch.",
+    description: "A top-down tactical defense game built on a custom C++ engine during freshman year. Focused on implementing core algorithms like pathfinding and procedural generation.",
     role: "Gameplay Programmer",
-    team: "Student Project",
-    tools: "Custom C++ Engine, C++",
+    team: "Student Project (Freshman Year)",
+    tools: "Custom C++ Engine, C++, Cellular Automata",
     roles: [
-      "Developed procedural wave generation algorithms.",
-      "Balanced game difficulty through iterative testing."
+      "Implemented Random Map Generation using Cellular Automata algorithms to ensure varied gameplay layouts.",
+      "Developed an A* pathfinding system from scratch for intelligent monster navigation within procedurally generated maps.",
+      "Balanced game difficulty through iterative testing and wave system tuning."
     ],
     links: [
       { label: "GitHub", href: "https://github.com/Junhyeongkimm/Suspense_defense" },
       { label: "YouTube Demo", href: "https://youtu.be/_2lPt6jRqoE" }
     ],
-    featured: false,
     media: [{ type: "youtube", src: "https://youtu.be/_2lPt6jRqoE" }],
+    featured: false,
     images: [
       "/projects/suspense-defense/images/shot-1.webp",
       "/projects/suspense-defense/images/shot-2.webp",
@@ -223,7 +226,8 @@ export const projects: Project[] = [
     ],
     links: [
       { label: "GitHub", href: "https://github.com/Hyeonjoon-Nam/thatgamejam_01" },
-      { label: "YouTube Demo", href: "https://youtu.be/hB2F7u6Q99A" }
+      { label: "YouTube Demo", href: "https://youtu.be/hB2F7u6Q99A" },
+      { label: "Play on Itch.io", href: "https://hyeonjoon-nam.itch.io/still-reaching" }
     ],
     media: [{ type: "youtube", src: "https://youtu.be/hB2F7u6Q99A" }],
     featured: false,
