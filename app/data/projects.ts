@@ -142,7 +142,7 @@ export const projects: Project[] = [
     team: "CS388 Student Project (Nintendo Dev)",
     tools: "Unity, C# (Nintendo SDK omitted), GitHub Actions",
     roles: [
-      "Implemented a custom Motion-to-Stroke recognition algorithm, converting raw accelerometer/gyro data into quantized directional vectors for combat input.",
+      "Implemented a gesture recognition pipeline (Normalization → Resampling → Quantization) to map noisy gyro sensor data into reliable 8-directional combat inputs.",
       "Developed a resilient stroke matching system using weighted edit distance to handle variability in player gestures.",
       "Engineered a CI/CD pipeline using GitHub Actions to automate WebGL builds and deployment to itch.io for rapid testing."
     ],
